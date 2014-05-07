@@ -1,7 +1,7 @@
 title:            Developer's Brainstorming
 description:      "Ruby, Rails e outras tecnologias"
 # Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              http://localhost:4000
+url:              http://oswaldoferreira.github.io
 disqus_shortname: oswaldof
 
 # Owner/author information
