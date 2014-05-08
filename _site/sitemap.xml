@@ -35,28 +35,4 @@
     
 
     
-    <url>
-        <loc>http://localhost:4000/code-highlighting-post/</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/sample-link-post/</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/readability-feature-post/</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/sample-post-images/</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/readability-post/</loc>
-    </url>
-    
-    <url>
-        <loc>http://localhost:4000/sample-post/</loc>
-    </url>
-    
 </urlset>
