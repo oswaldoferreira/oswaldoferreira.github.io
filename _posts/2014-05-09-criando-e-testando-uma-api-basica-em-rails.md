@@ -86,8 +86,8 @@ end
 {% endhighlight %}
 
 Com apenas isso já temos o necessário para responder requisições GET com todos
-objetos de usuários de nossa aplicação em formato *JSON*, podendo ser utilizados
-por qualquer outra aplicação web.
+objetos de usuários de nossa aplicação em formato *JSON*, possibilitando
+sua utilização por qualquer outra aplicação web.
 
 ### E esse é o fim do início.
 
