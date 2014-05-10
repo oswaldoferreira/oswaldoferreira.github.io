@@ -4,10 +4,10 @@ title: Criando e testando uma API básica no Rails
 description: "Abordagem simples para utilização do Rails para servir dados para web."
 tags: [rspec, spec, rails, json, api]
 image:
-  feature:
+  feature: texture-feature-X1.jpg
   credit:
   creditlink:
-comments:
+comments: true
 share:
 ---
 
@@ -59,7 +59,7 @@ end
 
 ### Specs
 
-Neste caso estamos testando se o retorno da resposta HTTP é 200 (success),
+Neste caso estamos testando se o resposta da requisição HTTP é 200 (success),
 transformando o JSON em um Hash e validando seu retorno.
 
 {% highlight ruby %}
