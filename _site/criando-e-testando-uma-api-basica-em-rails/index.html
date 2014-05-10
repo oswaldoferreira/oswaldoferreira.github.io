@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Criando e testando uma API básica em Rails &#8211; Developer's Brainstorming</title>
+<title>Criando e testando uma API básica no Rails &#8211; Developer's Brainstorming</title>
 <meta name="description" content="Abordagem simples para utilização do Rails para servir dados para web.">
 <meta name="keywords" content="rspec, spec, rails, json, api">
 <!-- Twitter Cards -->
@@ -19,7 +19,7 @@
 			
 		>
 	
-	<meta name="twitter:title" content="Criando e testando uma API básica em Rails">
+	<meta name="twitter:title" content="Criando e testando uma API básica no Rails">
 	<meta name="twitter:description" content="Abordagem simples para utilização do Rails para servir dados para web.">
 	<meta name="twitter:creator" content="@oswferreira">
 
@@ -27,7 +27,7 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Criando e testando uma API básica em Rails">
+<meta property="og:title" content="Criando e testando uma API básica no Rails">
 <meta property="og:description" content="Abordagem simples para utilização do Rails para servir dados para web.">
 <meta property="og:url" content="http://oswaldoferreira.github.io//criando-e-testando-uma-api-basica-em-rails/">
 <meta property="og:site_name" content="Developer's Brainstorming">
@@ -122,14 +122,14 @@
   <article>
     <div class="headline-wrap">
       
-        <h1><a href="http://oswaldoferreira.github.io//criando-e-testando-uma-api-basica-em-rails/" rel="bookmark" title="Criando e testando uma API básica em Rails">Criando e testando uma API básica em Rails</a></h1>
+        <h1><a href="http://oswaldoferreira.github.io//criando-e-testando-uma-api-basica-em-rails/" rel="bookmark" title="Criando e testando uma API básica no Rails">Criando e testando uma API básica no Rails</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
       <h2 id="rails--http">Rails &amp; HTTP</h2>
 
 <p>O rails é uma poderosa framework que nos permite desenvolver de forma ágil e produtiva,
-possibilitando o foco no que realmente temos como fim, não como meio.</p>
+possibilitando foco no que realmente temos como fim, não como meio.</p>
 
 <p>Em vista disso, hoje iremos aprender como criar uma api simples para servir
 dados de nossas aplicações no formato <a href="http://pt.wikipedia.org/wiki/JSON">JSON</a>.</p>
@@ -137,7 +137,7 @@ dados de nossas aplicações no formato <a href="http://pt.wikipedia.org/wiki/JS
 <p>Partindo do princípio básico do <a href="http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>,
 primeiramente precisamos de uma URL que responda à requisições <em>GET</em>.</p>
 
-<h3 id="routes">Routes</h3>
+<h2 id="routesrb">routes.rb</h2>
 
 <p>Com esta rota geramos uma url que nos encaminha para o controller <strong>Users</strong>.</p>
 
@@ -153,7 +153,7 @@ primeiramente precisamos de uma URL que responda à requisições <em>GET</em>.<
 <div class="highlight"><pre><code class="bash">  api_v1_users GET  /api/v1/users<span class="o">(</span>.:format<span class="o">)</span> api/v1/users#index
 </code></pre></div>
 
-<h3 id="controller">Controller</h3>
+<h3 id="apiv1userscontrollerrb">api/v1/users_controller.rb</h3>
 
 <p>Nossa controller tem um papel simples. Retornar todos usuários em formato <em>JSON</em>.</p>
 
@@ -192,7 +192,7 @@ transformando o JSON em um Hash e validando seu retorno.</p>
 <span class="k">end</span>
 </code></pre></div>
 
-<p>Com apenas isso já temos um serviço que dispõe uma rota para retorno de todos usuários.</p>
+<p>Com apenas isso já temos o necessário para responder requisições GET com todos usuários de nossa aplicação.</p>
 
 <h3 id="e-esse--o-fim-do-incio">E esse é o fim do início.</h3>
 
@@ -224,7 +224,7 @@ autenticação/autorização com as gems Cancan e Devise, tornando sua API mais 
 
 
         </div>
-        <p class="byline"><strong>Criando e testando uma API básica em Rails</strong> was published on <time datetime="2014-05-09T00:00:00-04:00">May 09, 2014</time> by <a href="http://oswaldoferreira.github.io//about" title="About Oswaldo Ferreira">Oswaldo Ferreira</a>.</p>
+        <p class="byline"><strong>Criando e testando uma API básica no Rails</strong> foi publicado em <time datetime="2014-05-09T00:00:00-04:00">May 09, 2014</time> by <a href="http://oswaldoferreira.github.io//about" title="About Oswaldo Ferreira">Oswaldo Ferreira</a>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -235,8 +235,6 @@ autenticação/autorização com as gems Cancan e Devise, tornando sua API mais 
   <div class="related-articles">
   <h4>You might also enjoy <small class="pull-right">(<a href="http://oswaldoferreira.github.io//posts/">View all posts</a>)</small></h4>
     <ul>
-    
-      <li><a href="http://oswaldoferreira.github.io//sample-post/" title="Sample Post">Sample Post</a></li>
     
     </ul>
     <hr />
@@ -267,7 +265,7 @@ autenticação/autorização com as gems Cancan e Devise, tornando sua API mais 
   })();
 </script>
 
-	        
+
 
 </body>
 </html>

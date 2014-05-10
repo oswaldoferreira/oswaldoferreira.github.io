@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Criando e testando uma API básica em Rails
+title: Criando e testando uma API básica no Rails
 description: "Abordagem simples para utilização do Rails para servir dados para web."
 tags: [rspec, spec, rails, json, api]
 image:
@@ -14,7 +14,7 @@ share:
 ## Rails & HTTP
 
 O rails é uma poderosa framework que nos permite desenvolver de forma ágil e produtiva,
-possibilitando o foco no que realmente temos como fim, não como meio.
+possibilitando foco no que realmente temos como fim, não como meio.
 
 Em vista disso, hoje iremos aprender como criar uma api simples para servir
 dados de nossas aplicações no formato [JSON](http://pt.wikipedia.org/wiki/JSON).
@@ -22,9 +22,11 @@ dados de nossas aplicações no formato [JSON](http://pt.wikipedia.org/wiki/JSON
 Partindo do princípio básico do [HTTP](http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol),
 primeiramente precisamos de uma URL que responda à requisições *GET*.
 
-### Routes
+## routes.rb
 
-Com esta rota geramos uma url que nos encaminha para o controller **Users**.
+Criando namespaces exclusivos para API nos ajudará a isolar comportamentos, direcionando para uma
+controller que terá o papel único de retornar dados em *JSON*. Neste caso estamos
+direcionando para controller **api/v1/users_controller.rb**.
 
 {% highlight ruby %}
   namespace :api do
@@ -41,9 +43,10 @@ Output do **rake routes**:
 {% endhighlight %}
 
 
-### Controller
+### api/v1/users_controller.rb
 
-Nossa controller tem um papel simples. Retornar todos usuários em formato *JSON*.
+Nossa controller neste momento terá apenas uma action (index), e esta irá responder
+com todos os usuários de nossa aplicação.
 
 {% highlight ruby %}
 class Api::V1::UsersController < ApplicationController
@@ -82,12 +85,14 @@ describe Api::V1::UsersController do
 end
 {% endhighlight %}
 
-Com apenas isso já temos um serviço que dispõe uma rota para retorno de todos usuários.
+Com apenas isso já temos o necessário para responder requisições GET com todos
+objetos de usuários de nossa aplicação em formato *JSON*, podendo ser utilizados
+por qualquer outra aplicação web.
 
 ### E esse é o fim do início.
 
 Este é um caso super simples, e claro, podemos melhora-lo utilizando mais models e
-autenticação/autorização com as gems Cancan e Devise, tornando sua API mais segura.
+autenticação/autorização com as gems Cancan e Devise, tornando sua API mais completa e segura.
 
 Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aí..
 
