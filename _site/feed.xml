@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://oswaldoferreira.github.io//feed.xml" />
 <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io/" />
-<updated>2014-05-10T17:16:29-04:00</updated>
+<updated>2014-05-11T12:01:50-04:00</updated>
 <id>http://oswaldoferreira.github.io//</id>
 <author>
   <name>Oswaldo Ferreira</name>
@@ -37,7 +37,9 @@ primeiramente precisamos de uma URL que responda à requisições &lt;em&gt;GET&
 
 &lt;h2 id=&quot;routesrb&quot;&gt;routes.rb&lt;/h2&gt;
 
-&lt;p&gt;Com esta rota geramos uma url que nos encaminha para o controller &lt;strong&gt;Users&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Criando namespaces exclusivos para API nos ajudará a isolar comportamentos, direcionando para uma
+controller que terá o papel único de retornar dados em &lt;em&gt;JSON&lt;/em&gt;. Neste caso estamos
+direcionando para controller &lt;strong&gt;api/v1/users_controller.rb&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:api&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:v1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
@@ -53,7 +55,8 @@ primeiramente precisamos de uma URL que responda à requisições &lt;em&gt;GET&
 
 &lt;h3 id=&quot;apiv1userscontrollerrb&quot;&gt;api/v1/users_controller.rb&lt;/h3&gt;
 
-&lt;p&gt;Nossa controller tem um papel simples. Retornar todos usuários em formato &lt;em&gt;JSON&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Nossa controller neste momento terá apenas uma action (index), e esta irá responder
+com todos os usuários de nossa aplicação.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UsersController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ApplicationController&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;index&lt;/span&gt;
@@ -65,7 +68,7 @@ primeiramente precisamos de uma URL que responda à requisições &lt;em&gt;GET&
 
 &lt;h3 id=&quot;specs&quot;&gt;Specs&lt;/h3&gt;
 
-&lt;p&gt;Neste caso estamos testando se o retorno da resposta HTTP é 200 (success),
+&lt;p&gt;Neste caso estamos testando se o resposta da requisição HTTP é 200 (success),
 transformando o JSON em um Hash e validando seu retorno.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UsersController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
@@ -90,14 +93,16 @@ transformando o JSON em um Hash e validando seu retorno.&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Com apenas isso já temos o necessário para responder requisições GET com todos usuários de nossa aplicação.&lt;/p&gt;
+&lt;p&gt;Com apenas isso já temos o necessário para responder requisições GET com todos
+objetos de usuários de nossa aplicação em formato &lt;em&gt;JSON&lt;/em&gt;, possibilitando
+sua utilização por qualquer outra aplicação web.&lt;/p&gt;
 
 &lt;h3 id=&quot;e-esse--o-fim-do-incio&quot;&gt;E esse é o fim do início.&lt;/h3&gt;
 
 &lt;p&gt;Este é um caso super simples, e claro, podemos melhora-lo utilizando mais models e
-autenticação/autorização com as gems Cancan e Devise, tornando sua API mais segura.&lt;/p&gt;
+autenticação/autorização com as gems Devise e Cancan, tornando sua API mais completa e segura.&lt;/p&gt;
 
-&lt;p&gt;Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aí..&lt;/p&gt;
+&lt;p&gt;Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aqui..&lt;/p&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;http://oswaldoferreira.github.io//criando-e-testando-uma-api-basica-em-rails/&quot;&gt;Criando e testando uma API básica no Rails&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldoferreira.github.io/&quot;&gt;Developer's Brainstorming&lt;/a&gt; on May 09, 2014.&lt;/p&gt;</content>
