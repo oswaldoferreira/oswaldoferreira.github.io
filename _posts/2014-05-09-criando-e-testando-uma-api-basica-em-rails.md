@@ -92,9 +92,9 @@ sua utilização por qualquer outra aplicação web.
 ### E esse é o fim do início.
 
 Este é um caso super simples, e claro, podemos melhora-lo utilizando mais models e
-autenticação/autorização com as gems Cancan e Devise, tornando sua API mais completa e segura.
+autenticação/autorização com as gems Devise e Cancan, tornando sua API mais completa e segura.
 
-Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aí..
+Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aqui..
 
 
 
