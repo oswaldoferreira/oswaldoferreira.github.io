@@ -8,7 +8,7 @@ image:
   credit:
   creditlink:
 comments: true
-share:
+published: true
 ---
 
 ## Rails & HTTP

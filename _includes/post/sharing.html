@@ -1,0 +1,21 @@
+<div class="sharing">
+  <ul id="menu" style="display: inline-flex; list-style: none; padding-left: 0px;">
+    <li>
+      {% if site.twitter_tweet_button %}
+        <a href="http://twitter.com/share" class="twitter-share-button" data-url="{{ site.url }}{{ page.url }}" data-via="{{ site.twitter_user }}" data-counturl="{{ site.url }}{{ page.url }}" style="width: 107px; height: 20px;">Tweet</a>
+      {% endif %}
+    </li>
+    <li>
+      {% if site.facebook_like %}
+        <div class="fb-like" data-href="http://oswaldoferreira.github.io/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+      {% endif %}
+    </li>
+<!--
+    <li style="display: inline;">
+      {% if site.google_plus_one %}
+        <div class="g-plusone" data-size="{{ site.google_plus_one_size }}"></div>
+      {% endif %}
+    </li> -->
+
+  </ul>
+</div>
