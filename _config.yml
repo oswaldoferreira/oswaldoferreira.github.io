@@ -2,8 +2,8 @@ title:            Developer's Brainstorming
 description:      "Ruby, Rails e outras tecnologias"
 # Your site's domain goes here. Leave localhost server or blank when working locally.
 url:              http://oswaldoferreira.github.io/
-# url:              http://oswaldoferreira.github.io
-disqus_shortname: oswaldoferreira
+
+date_format: "%d/%m/%Y"
 
 # Owner/author information
 owner:
@@ -47,7 +47,8 @@ pygments:    true
 markdown:    kramdown
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink: /:year/:month/:day/:title/
+relative_permalinks: true
+permalink: date
 
 kramdown:
   auto_ids: true
@@ -94,10 +95,11 @@ googleplus_user: oswaldofer
 googleplus_hidden: false
 
 # Disqus Comments
+disqus_shortname: oswaldoferreira
 disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id: UA-23447419-6
+google_analytics_tracking_id: UA-50742105-2
 
 # Facebook Like
 facebook_like: true
