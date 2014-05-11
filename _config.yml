@@ -3,7 +3,7 @@ description:      "Ruby, Rails e outras tecnologias"
 # Your site's domain goes here. Leave localhost server or blank when working locally.
 url:              http://oswaldoferreira.github.io/
 # url:              http://oswaldoferreira.github.io
-disqus_shortname: oswaldof
+disqus_shortname: oswaldoferreira
 
 # Owner/author information
 owner:
