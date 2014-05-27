@@ -25,7 +25,7 @@ O spring é um preloader atualmente nativo que basicamente inicia sua aplicaçã
 em background, tornando extremamente mais rápida qualquer ação que inicie o
 ambiente de desenvolvimento do Rails, como specs, rake tasks e migrations.
 
-### Na prática:
+### Na prática
 
 Inicializando uma pequena spec suite, temos os seguintes resultados sem a utlização do **spring**:
 
