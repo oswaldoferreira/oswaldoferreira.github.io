@@ -5,9 +5,9 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Criando e testando uma API básica no Rails &#8211; Developer's Brainstorming</title>
-<meta name="description" content="Abordagem simples para utilização do Rails para servir dados para web.">
-<meta name="keywords" content="rspec, spec, rails, json, api">
+<title>Melhorando seu workflow no Rails com Spring &#8211; Developer's Brainstorming</title>
+<meta name="description" content="Highlights do novo preloader nativo do Rails 4.1">
+<meta name="keywords" content="rails, 4.1, ruby, spring, preloader">
 <!-- Twitter Cards -->
 	
 		<meta name="twitter:card" content="summary_large_image">
@@ -17,24 +17,24 @@
 			
 		>
 	
-	<meta name="twitter:title" content="Criando e testando uma API básica no Rails">
-	<meta name="twitter:description" content="Abordagem simples para utilização do Rails para servir dados para web.">
+	<meta name="twitter:title" content="Melhorando seu workflow no Rails com Spring">
+	<meta name="twitter:description" content="Highlights do novo preloader nativo do Rails 4.1">
 	<meta name="twitter:creator" content="@oswferreira">
 
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Criando e testando uma API básica no Rails">
-<meta property="og:description" content="Abordagem simples para utilização do Rails para servir dados para web.">
-<meta property="og:url" content="http://oswaldoferreira.github.io/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html">
+<meta property="og:title" content="Melhorando seu workflow no Rails com Spring">
+<meta property="og:description" content="Highlights do novo preloader nativo do Rails 4.1">
+<meta property="og:url" content="http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html">
 <meta property="og:site_name" content="Developer's Brainstorming">
 
 
 
 
 
-<link rel="canonical" href="http://oswaldoferreira.github.io/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html">
+<link rel="canonical" href="http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html">
 <link href="http://oswaldoferreira.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Developer's Brainstorming Feed">
 <link rel="author" href="http://plus.google.com/+oswaldofer?rel=author">
 
@@ -100,7 +100,7 @@
     
       "http://oswaldoferreira.github.io/images/texture-feature-X1.jpg"
     
-  alt="Criando e testando uma API básica no Rails feature image">
+  alt="Melhorando seu workflow no Rails com Spring feature image">
   
   </div><!-- /.image-wrap -->
 
@@ -129,89 +129,78 @@
   <article>
     <div class="headline-wrap">
       
-        <h1><a href="http://oswaldoferreira.github.io/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html" rel="bookmark" title="Criando e testando uma API básica no Rails">Criando e testando uma API básica no Rails</a></h1>
+        <h1><a href="http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html" rel="bookmark" title="Melhorando seu workflow no Rails com Spring">Melhorando seu workflow no Rails com Spring</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <h2 id="rails--http">Rails &amp; HTTP</h2>
+      <p>Dia 18/04 foi lançada a tão esperada versão 4.1 do Rails. Nessa release
+houveram grandes mudanças e features para tornar ainda mais eficiente
+nosso workflow, sem falar no aumento de segurança da framework. Uma das features
+introduzidas foi o <strong>Spring</strong>, uma ferramenta booter que recebeu melhorias e
+agora se torna built-in no Rails 4.1.</p>
 
-<p>O rails é uma poderosa framework que nos permite desenvolver de forma ágil e produtiva,
-possibilitando foco no que realmente temos como fim, não como meio.</p>
+<h2 id="spring">Spring</h2>
 
-<p>Em vista disso, hoje iremos aprender como criar uma api simples para servir
-dados de nossas aplicações no formato <a href="http://pt.wikipedia.org/wiki/JSON">JSON</a>.</p>
+<p>O spring é um preloader atualmente nativo que basicamente inicia sua aplicação
+em background, tornando extremamente mais rápida qualquer ação que inicie o
+ambiente de desenvolvimento do Rails, como specs, rake tasks e migrations.</p>
 
-<p>Partindo do princípio básico do <a href="http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>,
-primeiramente precisamos de uma URL que responda à requisições <em>GET</em>.</p>
+<h3 id="na-prtica">Na prática:</h3>
 
-<h2 id="routesrb">routes.rb</h2>
+<p>Inicializando uma pequena spec suite, temos os seguintes resultados sem a utlização do <strong>spring</strong>:</p>
 
-<p>Criando namespaces exclusivos para API nos ajudará a isolar comportamentos, direcionando para uma
-controller que terá o papel único de retornar dados em <em>JSON</em>. Neste caso estamos
-direcionando para controller <strong>api/v1/users_controller.rb</strong>.</p>
+<div class="highlight"><pre><code class="bash">  <span class="nb">time </span>rspec spec/models/.
+  ..
 
-<div class="highlight"><pre><code class="ruby">  <span class="n">namespace</span> <span class="ss">:api</span> <span class="k">do</span>
-    <span class="n">namespace</span> <span class="ss">:v1</span> <span class="k">do</span>
-      <span class="n">get</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;users#index&#39;</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+  Finished in 14.38 seconds
+  520 examples, 0 failures
+
+  18,38s user 2,11s system 94% cpu 21,742 total
 </code></pre></div>
 
-<p>Output do <strong>rake routes</strong>:</p>
+<h4 id="total-2174">Total: 21,74</h4>
 
-<div class="highlight"><pre><code class="bash">  api_v1_users GET  /api/v1/users<span class="o">(</span>.:format<span class="o">)</span> api/v1/users#index
+<p>São <strong>21.74</strong> segundos no total e <strong>14.38</strong> segundos rodando os testes,
+o que nos dá <strong>7.36 segundos de booting, esperando o teste começar a ser executado</strong>.</p>
+
+<p>Lembrando que este tempo irá variar pelo tamanho da aplicação, quantidade de
+gems e máquina utilizada.</p>
+
+<p>Após a execução do primeiro comando utilizando <em>spring</em>, sua aplicação já estará
+rodando em background, portanto a execução do primeiro comando será lenta,
+como no exemplo acima. A partir da segunda execução já podemos ver os resultados:</p>
+
+<div class="highlight"><pre><code class="bash">  <span class="nb">time </span>spring rspec spec/models/.
+  ..
+
+  Finished in 16.03 seconds
+  520 examples, 0 failures, 1 pending
+
+  0,08s user 0,02s system 0% cpu 17,728 total
 </code></pre></div>
 
-<h3 id="apiv1userscontrollerrb">api/v1/users_controller.rb</h3>
+<h4 id="total-1773">Total: 17,73</h4>
 
-<p>Nossa controller neste momento terá apenas uma action (index), e esta irá responder
-com todos os usuários de nossa aplicação.</p>
+<p>Como podemos ver, ganhamos aproximadamente <strong>4 segundos</strong>, o que pode ser uma
+grande diferença para equipes que praticam TDD ou executam testes com grande frequência.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-  <span class="k">def</span> <span class="nf">index</span>
-    <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span>
-    <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@users</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<h3 id="conselhos--pitfalls">Conselhos &amp; Pitfalls</h3>
 
-<h3 id="specs">Specs</h3>
+<ul>
+  <li>Setup rápido no <a href="https://github.com/rails/spring/blob/master/README.md">readme</a></li>
+  <li>Você pode checar o status da sua aplicação pelo comando <strong>spring status</strong>.</li>
+  <li>Evite manter a aplicação em background por mais de 1 dia, pois o spring
+não recarrega a aplicação de tempo em tempo, o que pode causar instabilidade em
+specs que utilizam Date, Time, e DateTime. Neste caso utilize <strong>spring stop</strong>.</li>
+</ul>
 
-<p>Neste caso estamos testando se o resposta da requisição HTTP é 200 (success),
-transformando o JSON em um Hash e validando seu retorno.</p>
+<h2 id="links">Links</h2>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">describe</span> <span class="no">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">UsersController</span> <span class="k">do</span>
-  <span class="n">context</span> <span class="s1">&#39;GET index&#39;</span> <span class="k">do</span>
-    <span class="n">it</span> <span class="s1">&#39;when users&#39;</span> <span class="k">do</span>
-      <span class="no">User</span><span class="o">.</span><span class="n">create!</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="ss">birthday</span><span class="p">:</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;14/03/1991&#39;</span><span class="p">)</span>
-      <span class="n">get</span> <span class="s1">&#39;index&#39;</span>
-      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_success</span>
-
-      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
-      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="o">[</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;birthday&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;1991-03-14&quot;</span><span class="p">}</span><span class="o">]</span>
-    <span class="k">end</span>
-
-    <span class="n">it</span> <span class="s1">&#39;when no users&#39;</span> <span class="k">do</span>
-      <span class="n">get</span> <span class="s1">&#39;index&#39;</span>
-      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_success</span>
-
-      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
-      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_empty</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p>Com apenas isso já temos o necessário para responder requisições GET com todos
-objetos de usuários de nossa aplicação em formato <em>JSON</em>, possibilitando
-sua utilização por qualquer outra aplicação web.</p>
-
-<h3 id="e-esse--o-fim-do-incio">E esse é o fim do início.</h3>
-
-<p>Este é um caso super simples, e claro, podemos melhora-lo utilizando mais models e
-autenticação/autorização com as gems Devise e Cancan, tornando sua API mais completa e segura.</p>
-
-<p>Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aqui..</p>
+<ul>
+  <li>Guia de upgrade para Rails 4.1 - <a href="http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-4-0-to-rails-4-1">Link</a>.</li>
+  <li>Rails 4.1 Release Notes - <a href="http://edgeguides.rubyonrails.org/4_1_release_notes.html">Link</a></li>
+  <li>Spring Gem - <a href="https://github.com/rails/spring/">Link</a></li>
+</ul>
 
 
       <hr />
@@ -236,13 +225,13 @@ autenticação/autorização com as gems Devise e Cancan, tornando sua API mais 
 
 
         </div>
-        <p class="byline"><strong>Criando e testando uma API básica no Rails</strong> foi publicado em <time datetime="2014-05-09T00:00:00-04:00">May 09, 2014</time> by <a href="http://oswaldoferreira.github.io/about" title="About Oswaldo Ferreira">Oswaldo Ferreira</a>.</p>
+        <p class="byline"><strong>Melhorando seu workflow no Rails com Spring</strong> foi publicado em <time datetime="2014-05-26T00:00:00-04:00">May 26, 2014</time> and last modified on <time datetime="2014-05-26">May 26, 2014</time> by <a href="http://oswaldoferreira.github.io/about" title="About Oswaldo Ferreira">Oswaldo Ferreira</a>.</p>
         
           <div class="sharing">
   <ul id="menu" style="display: inline-flex; list-style: none; padding-left: 0px;">
     <li>
       
-        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://oswaldoferreira.github.io/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html" data-via="oswferreira" data-counturl="http://oswaldoferreira.github.io/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html" style="width: 107px; height: 20px;">Tweet</a>
+        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html" data-via="oswferreira" data-counturl="http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html" style="width: 107px; height: 20px;">Tweet</a>
       
     </li>
     <li>

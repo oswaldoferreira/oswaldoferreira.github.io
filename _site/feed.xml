@@ -4,13 +4,99 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://oswaldoferreira.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io" />
-<updated>2014-05-11T16:40:23-04:00</updated>
+<updated>2014-05-26T22:56:38-04:00</updated>
 <id>http://oswaldoferreira.github.io/</id>
 <author>
   <name>Oswaldo Ferreira</name>
   <uri>http://oswaldoferreira.github.io/</uri>
   <email>oswluizf@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Melhorando seu workflow no Rails com Spring]]></title>
+  <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html" />
+  <id>http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring</id>
+  <updated>2014-05-26 18:30:34 -0400T00:00:00-00:00</updated>
+  <published>2014-05-26T00:00:00-04:00</published>
+  
+  <author>
+    <name>Oswaldo Ferreira</name>
+    <uri>http://oswaldoferreira.github.io</uri>
+    <email>oswluizf@gmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;Dia 18/04 foi lançada a tão esperada versão 4.1 do Rails. Nessa release
+houveram grandes mudanças e features para tornar ainda mais eficiente
+nosso workflow, sem falar no aumento de segurança da framework. Uma das features
+introduzidas foi o &lt;strong&gt;Spring&lt;/strong&gt;, uma ferramenta booter que recebeu melhorias e
+agora se torna built-in no Rails 4.1.&lt;/p&gt;
+
+&lt;h2 id=&quot;spring&quot;&gt;Spring&lt;/h2&gt;
+
+&lt;p&gt;O spring é um preloader atualmente nativo que basicamente inicia sua aplicação
+em background, tornando extremamente mais rápida qualquer ação que inicie o
+ambiente de desenvolvimento do Rails, como specs, rake tasks e migrations.&lt;/p&gt;
+
+&lt;h3 id=&quot;na-prtica&quot;&gt;Na prática:&lt;/h3&gt;
+
+&lt;p&gt;Inicializando uma pequena spec suite, temos os seguintes resultados sem a utlização do &lt;strong&gt;spring&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;  &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;rspec spec/models/.
+  ..
+
+  Finished in 14.38 seconds
+  520 examples, 0 failures
+
+  18,38s user 2,11s system 94% cpu 21,742 total
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;total-2174&quot;&gt;Total: 21,74&lt;/h4&gt;
+
+&lt;p&gt;São &lt;strong&gt;21.74&lt;/strong&gt; segundos no total e &lt;strong&gt;14.38&lt;/strong&gt; segundos rodando os testes,
+o que nos dá &lt;strong&gt;7.36 segundos de booting, esperando o teste começar a ser executado&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Lembrando que este tempo irá variar pelo tamanho da aplicação, quantidade de
+gems e máquina utilizada.&lt;/p&gt;
+
+&lt;p&gt;Após a execução do primeiro comando utilizando &lt;em&gt;spring&lt;/em&gt;, sua aplicação já estará
+rodando em background, portanto a execução do primeiro comando será lenta,
+como no exemplo acima. A partir da segunda execução já podemos ver os resultados:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;  &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;spring rspec spec/models/.
+  ..
+
+  Finished in 16.03 seconds
+  520 examples, 0 failures, 1 pending
+
+  0,08s user 0,02s system 0% cpu 17,728 total
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;total-1773&quot;&gt;Total: 17,73&lt;/h4&gt;
+
+&lt;p&gt;Como podemos ver, ganhamos aproximadamente &lt;strong&gt;4 segundos&lt;/strong&gt;, o que pode ser uma
+grande diferença para equipes que praticam TDD ou executam testes com grande frequência.&lt;/p&gt;
+
+&lt;h3 id=&quot;conselhos--pitfalls&quot;&gt;Conselhos &amp;amp; Pitfalls&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Setup rápido no &lt;a href=&quot;https://github.com/rails/spring/blob/master/README.md&quot;&gt;readme&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Você pode checar o status da sua aplicação pelo comando &lt;strong&gt;spring status&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Evite manter a aplicação em background por mais de 1 dia, pois o spring
+não recarrega a aplicação de tempo em tempo, o que pode causar instabilidade em
+specs que utilizam Date, Time, e DateTime. Neste caso utilize &lt;strong&gt;spring stop&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;links&quot;&gt;Links&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Guia de upgrade para Rails 4.1 - &lt;a href=&quot;http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-4-0-to-rails-4-1&quot;&gt;Link&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Rails 4.1 Release Notes - &lt;a href=&quot;http://edgeguides.rubyonrails.org/4_1_release_notes.html&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Gem - &lt;a href=&quot;https://github.com/rails/spring/&quot;&gt;Link&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html&quot;&gt;Melhorando seu workflow no Rails com Spring&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldoferreira.github.io&quot;&gt;Developer's Brainstorming&lt;/a&gt; on May 26, 2014.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
