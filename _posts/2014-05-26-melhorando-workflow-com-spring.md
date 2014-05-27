@@ -13,7 +13,7 @@ comments: true
 published: true
 ---
 
-Dia 18/04 foi lançada a tão esperada versão 4.1 do Rails. Nessa release
+Dia 18/04/2014 foi lançada a tão esperada versão 4.1 do Rails. Nessa release
 houveram grandes mudanças e features para tornar ainda mais eficiente
 nosso workflow, sem falar no aumento de segurança da framework. Uma das features
 introduzidas foi o **Spring**, uma ferramenta booter que recebeu melhorias e
