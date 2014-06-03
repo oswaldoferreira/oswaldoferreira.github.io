@@ -119,6 +119,7 @@ DEPENDENCIES
   activesupport
   coderay
   github-pages
+  jekyll-sitemap
   kramdown
   pry
   rake
