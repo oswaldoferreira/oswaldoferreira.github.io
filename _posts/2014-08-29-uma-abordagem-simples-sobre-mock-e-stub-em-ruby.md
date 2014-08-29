@@ -12,8 +12,6 @@ comments: true
 published: true
 ---
 
-### Introdução
-
 Em determinadas situações, onde múltiplas classes são desenvolvidas quase simultaneamente,
   podemos utilizar objetos *fake* para criar suas relações. Essa técnica possui uma função simples e bem definida, manter a aplicação isoladamente testada.
 
