@@ -119,7 +119,10 @@ DEPENDENCIES
   activesupport
   coderay
   github-pages
+  jekyll-mentions
+  jekyll-redirect-from
   jekyll-sitemap
+  jemoji
   kramdown
   pry
   rake

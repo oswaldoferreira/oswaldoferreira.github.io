@@ -4,13 +4,90 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://oswaldoferreira.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io" />
-<updated>2014-06-03T07:03:44-04:00</updated>
+<updated>2014-08-29T01:02:58-04:00</updated>
 <id>http://oswaldoferreira.github.io/</id>
 <author>
   <name>Oswaldo Ferreira</name>
   <uri>http://oswaldoferreira.github.io/</uri>
   <email>oswluizf@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Introdução à Mock e Stub com Rspec]]></title>
+  <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby.html" />
+  <id>http://oswaldoferreira.github.io/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby</id>
+  <updated>2014-08-28 23:09:53 -0400T00:00:00-00:00</updated>
+  <published>2014-08-29T00:00:00-04:00</published>
+  
+  <author>
+    <name>Oswaldo Ferreira</name>
+    <uri>http://oswaldoferreira.github.io</uri>
+    <email>oswluizf@gmail.com</email>
+  </author>
+  <content type="html">&lt;h3 id=&quot;introduo&quot;&gt;Introdução&lt;/h3&gt;
+
+&lt;p&gt;Em determinadas situações, onde múltiplas classes são desenvolvidas quase simultaneamente,
+  podemos utilizar objetos &lt;em&gt;fake&lt;/em&gt; para criar suas relações. Essa técnica possui uma função simples e bem definida, manter a aplicação isoladamente testada.&lt;/p&gt;
+
+&lt;p&gt;A utilização do &lt;strong&gt;mock&lt;/strong&gt; permite gerar objetos que fazem o papel de dublê de outra classe (que muitas vezes ainda nem foi criada) em um teste, ou seja, retiramos a necessidade (dependência) da classe que não estamos testando neste momento.&lt;/p&gt;
+
+&lt;p&gt;O &lt;strong&gt;stub&lt;/strong&gt; nada mais é que uma saída forjada para uma chamada à um objeto, ou seja,
+ele responde à mensagens enviadas da maneira que queremos, atuando como um dublê de métodos.&lt;/p&gt;
+
+&lt;h3 id=&quot;exemplo&quot;&gt;Exemplo&lt;/h3&gt;
+
+&lt;p&gt;Vamos estabelecer o seguinte exemplo bem abstrato aplicando o
+&lt;a href=&quot;http://pt.wikipedia.org/wiki/Test_Driven_Development&quot;&gt;TDD&lt;/a&gt;:&lt;/p&gt;
+
+&lt;h4 id=&quot;uma-pessoa-s--feliz-quando-est-no-park&quot;&gt;“Uma pessoa só é feliz quando está no Park”&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;let&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:place&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Place&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;let&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;place&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;place&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;is_happy?&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;when true&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;place&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;and_return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Park&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_happy?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;be_true&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+      &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;when false&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;place&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;and_return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Any other place&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_happy?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;be_false&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Person&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;place&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;vi&quot;&gt;@place&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;place&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;is_happy?&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;place&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Park&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Neste exemplo testamos qual seria a influência de uma classe externa (Place),
+que ainda não existe. Reparem na utilização do &lt;strong&gt;double(‘Place’)&lt;/strong&gt; e o &lt;strong&gt;stub(:name)&lt;/strong&gt;.
+O &lt;em&gt;double&lt;/em&gt; é o mock de place, ou seja, um objeto fictício, enquanto o &lt;em&gt;stub&lt;/em&gt; gera
+um método em cima do mock. Sendo assim, podemos testar os envios de mensagem internamente,
+criando no próprio teste um contrato de como será implementada sua classe &lt;strong&gt;Place&lt;/strong&gt;,
+por exemplo.&lt;/p&gt;
+
+&lt;h3 id=&quot;links-importantes&quot;&gt;Links importantes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Syntax &lt;a href=&quot;https://relishapp.com/rspec/rspec-mocks/docs&quot;&gt;Mock &amp;amp; Stub&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Interessado em TDD? &lt;a href=&quot;http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530&quot;&gt;Test Driven Development: By Example&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://oswaldoferreira.github.io/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby.html&quot;&gt;Introdução à Mock e Stub com Rspec&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldoferreira.github.io&quot;&gt;Developer's Brainstorming&lt;/a&gt; on August 29, 2014.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
