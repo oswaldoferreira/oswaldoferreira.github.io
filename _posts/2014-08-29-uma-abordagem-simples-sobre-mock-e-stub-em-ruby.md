@@ -22,7 +22,7 @@ A utilização do **mock** permite gerar objetos que fazem o papel de dublê de 
 
 
 O **stub** nada mais é que uma saída forjada para uma chamada à um objeto, ou seja,
-ele responde à mensagens enviadas da maneira que queremos, atuando como um dublê de métodos.
+ele responde como queremos à mensagens enviadas, atuando como um dublê de métodos.
 
 ### Exemplo
 
@@ -52,8 +52,8 @@ Vamos estabelecer o seguinte exemplo bem abstrato aplicando o
 
 {% highlight ruby %}
   class Person
-    def initialize(place)
-      @place = place
+    def initialize(params)
+      @place = params.fetch(:place)
     end
 
     def is_happy?
