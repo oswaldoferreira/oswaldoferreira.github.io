@@ -37,13 +37,13 @@ Normalmente, ele é utilizado quando precisamos armazenar dados que não possuem
 ## Criando uma tabela com atributo Hstore (Migration):
 
 {% highlight ruby %}
-  class CreateProducts < ActiveRecord::Migration
+  class CreateCabs < ActiveRecord::Migration
      def change
        create_table :cab do |t|
           t.float :traveled_distance
           t.hstore :properties
 
-         t.timestamps
+          t.timestamps
        end
      end
    end
