@@ -38,15 +38,15 @@ Normalmente, ele é utilizado quando precisamos armazenar dados que não possuem
 
 {% highlight ruby %}
   class CreateCabs < ActiveRecord::Migration
-     def change
-       create_table :cab do |t|
-          t.float :traveled_distance
-          t.hstore :properties
+    def change
+      create_table :cab do |t|
+        t.float :traveled_distance
+        t.hstore :properties
 
-          t.timestamps
-       end
-     end
-   end
+        t.timestamps
+      end
+    end
+  end
 {% endhighlight %}
 
 ## Playing around

@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://oswaldoferreira.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io" />
-<updated>2014-09-30T00:31:41-04:00</updated>
+<updated>2014-09-30T00:35:58-04:00</updated>
 <id>http://oswaldoferreira.github.io/</id>
 <author>
   <name>Oswaldo Ferreira</name>
@@ -47,16 +47,16 @@ possibilitando queries e indexações desses dados de maneira simples e rápida.
 
 &lt;h2 id=&quot;criando-uma-tabela-com-atributo-hstore-migration&quot;&gt;Criando uma tabela com atributo Hstore (Migration):&lt;/h2&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CreateProducts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
-       &lt;span class=&quot;n&quot;&gt;create_table&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:cab&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:traveled_distance&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hstore&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:properties&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CreateCabs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;create_table&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:cab&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:traveled_distance&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hstore&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:properties&lt;/span&gt;
 
-         &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timestamps&lt;/span&gt;
-       &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timestamps&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;playing-around&quot;&gt;Playing around&lt;/h2&gt;

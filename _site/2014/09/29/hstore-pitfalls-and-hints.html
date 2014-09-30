@@ -155,16 +155,16 @@ possibilitando queries e indexações desses dados de maneira simples e rápida.
 
 <h2 id="criando-uma-tabela-com-atributo-hstore-migration">Criando uma tabela com atributo Hstore (Migration):</h2>
 
-<div class="highlight"><pre><code class="ruby">  <span class="k">class</span> <span class="nc">CreateProducts</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
-     <span class="k">def</span> <span class="nf">change</span>
-       <span class="n">create_table</span> <span class="ss">:cab</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
-          <span class="n">t</span><span class="o">.</span><span class="n">float</span> <span class="ss">:traveled_distance</span>
-          <span class="n">t</span><span class="o">.</span><span class="n">hstore</span> <span class="ss">:properties</span>
+<div class="highlight"><pre><code class="ruby">  <span class="k">class</span> <span class="nc">CreateCabs</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+    <span class="k">def</span> <span class="nf">change</span>
+      <span class="n">create_table</span> <span class="ss">:cab</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">float</span> <span class="ss">:traveled_distance</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">hstore</span> <span class="ss">:properties</span>
 
-         <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
-       <span class="k">end</span>
-     <span class="k">end</span>
-   <span class="k">end</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
 </code></pre></div>
 
 <h2 id="playing-around">Playing around</h2>
