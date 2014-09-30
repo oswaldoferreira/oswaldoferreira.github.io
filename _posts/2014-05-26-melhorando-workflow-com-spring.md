@@ -5,7 +5,7 @@ description: "Highlights do novo preloader nativo do Rails 4.1"
 modified: 2014-05-26 19:30:34 -0300
 tags: [rails, 4.1, ruby, spring, preloader]
 image:
-  feature: texture-feature-X1.jpg
+  feature: texture-feature-X2.jpg
   credit:
   creditlink:
 share:

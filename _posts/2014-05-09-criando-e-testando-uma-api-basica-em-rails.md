@@ -4,7 +4,7 @@ title: Criando e testando uma API básica no Rails
 description: "Abordagem simples para utilização do Rails para servir dados para web."
 tags: [rspec, spec, rails, json, api]
 image:
-  feature: texture-feature-X1.jpg
+  feature: texture-feature-X2.jpg
   credit:
   creditlink:
 comments: true

@@ -5,7 +5,7 @@ description: "Como aplicar ''fake'' objects em seus testes em Ruby"
 modified: 2014-08-29 00:09:53 -0300
 tags: [mock, stub, ruby, boas praticas, rspec, tdd, unit test]
 image:
-  feature: texture-feature-X1.jpg
+  feature: texture-feature-X2.jpg
   credit:
   creditlink:
 comments: true
