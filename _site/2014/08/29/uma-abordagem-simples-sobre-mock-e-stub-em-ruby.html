@@ -111,7 +111,7 @@
 	<img src="http://oswaldoferreira.github.io/images/bio-photo.jpg" class="bio-photo" alt="Oswaldo Ferreira bio photo"></a>
 
 <h3>Oswaldo Ferreira</h3>
-<p>Sou desenvolvedor backend na Algorich e estudante em Sistemas de Informação no IFF</p>
+<p>Developer at Algorich, technology enthusiast, traveler and professional music crawler.</p>
 <a href="http://twitter.com/oswferreira" class="author-social" target="_blank"><i class="icon-twitter"></i> Twitter</a>
 
 <a href="http://plus.google.com/+oswaldofer" class="author-social" target="_blank"><i class="icon-google-plus"></i> Google+</a>
@@ -133,15 +133,13 @@
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <h3 id="introduo">Introdução</h3>
-
-<p>Em determinadas situações, onde múltiplas classes são desenvolvidas quase simultaneamente,
+      <p>Em determinadas situações, onde múltiplas classes são desenvolvidas quase simultaneamente,
   podemos utilizar objetos <em>fake</em> para criar suas relações. Essa técnica possui uma função simples e bem definida, manter a aplicação isoladamente testada.</p>
 
 <p>A utilização do <strong>mock</strong> permite gerar objetos que fazem o papel de dublê de outra classe (que muitas vezes ainda nem foi criada) em um teste, ou seja, retiramos a necessidade (dependência) da classe que não estamos testando neste momento.</p>
 
 <p>O <strong>stub</strong> nada mais é que uma saída forjada para uma chamada à um objeto, ou seja,
-ele responde à mensagens enviadas da maneira que queremos, atuando como um dublê de métodos.</p>
+ele responde como queremos à mensagens enviadas, atuando como um dublê de métodos.</p>
 
 <h3 id="exemplo">Exemplo</h3>
 
@@ -169,8 +167,8 @@ ele responde à mensagens enviadas da maneira que queremos, atuando como um dubl
 </code></pre></div>
 
 <div class="highlight"><pre><code class="ruby">  <span class="k">class</span> <span class="nc">Person</span>
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">place</span><span class="p">)</span>
-      <span class="vi">@place</span> <span class="o">=</span> <span class="n">place</span>
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@place</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:place</span><span class="p">)</span>
     <span class="k">end</span>
 
     <span class="k">def</span> <span class="nf">is_happy?</span>
@@ -201,7 +199,7 @@ por exemplo.</p>
 	<img src="http://oswaldoferreira.github.io/images/bio-photo.jpg" class="bio-photo" alt="Oswaldo Ferreira bio photo"></a>
 
 <h3>Oswaldo Ferreira</h3>
-<p>Sou desenvolvedor backend na Algorich e estudante em Sistemas de Informação no IFF</p>
+<p>Developer at Algorich, technology enthusiast, traveler and professional music crawler.</p>
 <a href="http://twitter.com/oswferreira" class="author-social" target="_blank"><i class="icon-twitter"></i> Twitter</a>
 
 <a href="http://plus.google.com/+oswaldofer" class="author-social" target="_blank"><i class="icon-google-plus"></i> Google+</a>
