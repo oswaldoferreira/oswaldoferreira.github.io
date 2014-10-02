@@ -23,39 +23,39 @@ Normalmente, ele é utilizado quando precisamos armazenar dados que não possuem
 ## Setup (Migration):
 
 {% highlight ruby %}
-  class SetupHstore < ActiveRecord::Migration
-    def self.up
-      execute "CREATE EXTENSION IF NOT EXISTS hstore"
-    end
-
-    def self.down
-      execute "DROP EXTENSION IF EXISTS hstore"
-    end
+class SetupHstore < ActiveRecord::Migration
+  def self.up
+    execute "CREATE EXTENSION IF NOT EXISTS hstore"
   end
+
+  def self.down
+    execute "DROP EXTENSION IF EXISTS hstore"
+  end
+end
 {% endhighlight %}
 
 ## Criando uma tabela com atributo Hstore (Migration):
 
 {% highlight ruby %}
-  class CreateCabs < ActiveRecord::Migration
-    def change
-      create_table :cab do |t|
-        t.float :traveled_distance
-        t.hstore :properties
+class CreateCabs < ActiveRecord::Migration
+  def change
+    create_table :cab do |t|
+      t.float :traveled_distance
+      t.hstore :properties
 
-        t.timestamps
-      end
+      t.timestamps
     end
   end
+end
 {% endhighlight %}
 
 ## Playing around
 
 {% highlight ruby %}
 
-  cab = Cab.create!(properties: { lat: 123, lng: 321, active: true })
-  cab['properties']
-  => {"lat"=>"123", "lng"=>"321", "active"=>"true"}
+cab = Cab.create!(properties: { lat: 123, lng: 321, active: true })
+cab['properties']
+=> {"lat"=>"123", "lng"=>"321", "active"=>"true"}
 
 {% endhighlight %}
 
@@ -66,26 +66,26 @@ Normalmente, ele é utilizado quando precisamos armazenar dados que não possuem
 Contem a key 'active'
 
 {% highlight ruby %}
-  Cab.where("properties ? 'active'")
+Cab.where("properties ? 'active'")
 {% endhighlight %}
 
 Onde a key 'lat' for '123'
 
 {% highlight ruby %}
-  Cab.where("properties -> 'lat' = '123'")
+Cab.where("properties -> 'lat' = '123'")
 {% endhighlight %}
 
 A mesma query 2x mais rápida (utilizando indexes)
 
 {% highlight ruby %}
-  Cab.where("data @> 'foo=>bar'")
+Cab.where("data @> 'foo=>bar'")
 {% endhighlight %}
 
 
 Onde 'active' for diferente de 'true':
 
 {% highlight ruby %}
-  Cab.where("properties -> 'active' <> 'true'")
+Cab.where("properties -> 'active' <> 'true'")
 {% endhighlight %}
 
 #### Já que o hstore converte todas keys/values para string, atenção ao fazer boolean queries, sempre force um *.to_s* para garantir.
@@ -93,7 +93,7 @@ Onde 'active' for diferente de 'true':
 Objetos onde 'lng' se parece com '23'
 
 {% highlight ruby %}
-  Cab.where("properties -> 'lng' LIKE '%23%'")
+Cab.where("properties -> 'lng' LIKE '%23%'")
 {% endhighlight %}
 
 ## Armazenando listas como valor
@@ -101,12 +101,12 @@ Objetos onde 'lng' se parece com '23'
 Já sabemos que o Hstore transforma keys/values em strings, mas ainda assim podemos armazenar listas como valor. Elas são persistidas e retornam em formato *Json*, o que torna o *parse* muito fácil.
 
 {% highlight ruby %}
-  cab = Cab.create(properties: { lat: 11122, lng: 33221, drivers: ['Donnie', 'Jane'] })
-  cab.properties['drivers']
-  => "['Donnie', 'Jane']"
+cab = Cab.create(properties: { lat: 11122, lng: 33221, drivers: ['Donnie', 'Jane'] })
+cab.properties['drivers']
+=> "['Donnie', 'Jane']"
 
-  JSON.parse(cab.properties['drivers'])
-  => ['Donnie', 'Jane']
+JSON.parse(cab.properties['drivers'])
+=> ['Donnie', 'Jane']
 {% endhighlight %}
 
 #### Hashes nested não funcionam. O hash interno é convertido em string, e o postgres não consegue montar um *Json* de retorno pra esse valor. Uma solução que não recomendo é a utilização do método *eval* na hash string retornada (tendências cabalisticas).
@@ -116,9 +116,9 @@ Já sabemos que o Hstore transforma keys/values em strings, mas ainda assim pode
 Uma vantagem bem legal do hstore é a similaridade ao mundo NoSql, onde novas keys/values podem ser inseridas a qualquer momento, de maneira bem fácil. Por exemplo, podemos decidir inserir a numeração da placa do nosso *Cab*, mas nem todos objetos precisam ter esse atributo. Reparem que faço um merge dos atributos antigos para não perde-los.
 
 {% highlight ruby %}
-  cab.update!(properties: cab.properties.merge(plate: 'XXX3344'))
-  cab.properties
-  => { "lat"=>"11122", "lng"=>"33221", "active"=>"true", "drivers"=>['Donnie', 'Jane'], "plate"=>'XXX3344' }
+cab.update!(properties: cab.properties.merge(plate: 'XXX3344'))
+cab.properties
+=> { "lat"=>"11122", "lng"=>"33221", "active"=>"true", "drivers"=>['Donnie', 'Jane'], "plate"=>'XXX3344' }
 {% endhighlight %}
 
 ## Acessando valores de maneira simples
@@ -126,37 +126,33 @@ Uma vantagem bem legal do hstore é a similaridade ao mundo NoSql, onde novas ke
 1. Podemos criar manualmente os accessors de nossas propriedades
 
 {% highlight ruby %}
-  def drivers
-    self.properties['drivers']
-  end
+def drivers
+  self.properties['drivers']
+end
 {% endhighlight %}
 
 2. Ou podemos utilizar o accessor helper
 
 {% highlight ruby %}
-  store_accessor :properties, :drivers
+store_accessor :properties, :drivers
 {% endhighlight %}
 
 #### O store_accessor ainda habilita a utilização das validações de atributos do Rails.
 
 {% highlight ruby %}
-  store_accessor :properties, :lat, :lng
-  validates :lat, :lng, presence: true
+store_accessor :properties, :lat, :lng
+validates :lat, :lng, presence: true
 {% endhighlight %}
 
 
 ## Concluindo
 
-O hstore facilita demais o armazenamento à nível flat (um nível). Já que
+O hstore facilita demais o manejo de flat hashes (um nível de nesting). Já que
 temos acesso às validações do Rails, podemos assegurar um tipo de dado de um atributo,
 e apenas fazer a conversão no caminho de volta.
 
-Se o caso for mais complexo, envolvendo nested hashes, uma das opções é a utilização
+Se o caso for mais complexo, envolvendo nested hashes e mais "relações", uma das opções é a utilização
 do formato JSON, onde acabariamos abrindo mão de benefícios que o Hstore
-proporciona (como queries, indexes, etc). No entando, o melhor dos mundos
-seria optar por um banco de dados nosql.
-
-
-Então ficamos por aqui, qualquer dúvida ou ajuste só entrar em contato.
-
+proporciona (como queries, indexes, etc). No entando, o melhor dos mundos neste
+caso seria optar por um banco NoSql, como MongoDB, CouchDB, entre outros.
 

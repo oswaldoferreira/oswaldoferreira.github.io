@@ -142,36 +142,36 @@ possibilitando queries e indexações desses dados de maneira simples e rápida.
 
 <h2 id="setup-migration">Setup (Migration):</h2>
 
-<div class="highlight"><pre><code class="ruby">  <span class="k">class</span> <span class="nc">SetupHstore</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
-    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
-      <span class="n">execute</span> <span class="s2">&quot;CREATE EXTENSION IF NOT EXISTS hstore&quot;</span>
-    <span class="k">end</span>
-
-    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">down</span>
-      <span class="n">execute</span> <span class="s2">&quot;DROP EXTENSION IF EXISTS hstore&quot;</span>
-    <span class="k">end</span>
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">SetupHstore</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
+    <span class="n">execute</span> <span class="s2">&quot;CREATE EXTENSION IF NOT EXISTS hstore&quot;</span>
   <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">down</span>
+    <span class="n">execute</span> <span class="s2">&quot;DROP EXTENSION IF EXISTS hstore&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre></div>
 
 <h2 id="criando-uma-tabela-com-atributo-hstore-migration">Criando uma tabela com atributo Hstore (Migration):</h2>
 
-<div class="highlight"><pre><code class="ruby">  <span class="k">class</span> <span class="nc">CreateCabs</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
-    <span class="k">def</span> <span class="nf">change</span>
-      <span class="n">create_table</span> <span class="ss">:cab</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">float</span> <span class="ss">:traveled_distance</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">hstore</span> <span class="ss">:properties</span>
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">CreateCabs</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">create_table</span> <span class="ss">:cab</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">float</span> <span class="ss">:traveled_distance</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">hstore</span> <span class="ss">:properties</span>
 
-        <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
-      <span class="k">end</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
     <span class="k">end</span>
   <span class="k">end</span>
+<span class="k">end</span>
 </code></pre></div>
 
 <h2 id="playing-around">Playing around</h2>
 
-<div class="highlight"><pre><code class="ruby">  <span class="n">cab</span> <span class="o">=</span> <span class="no">Cab</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="p">{</span> <span class="ss">lat</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="ss">lng</span><span class="p">:</span> <span class="mi">321</span><span class="p">,</span> <span class="ss">active</span><span class="p">:</span> <span class="kp">true</span> <span class="p">})</span>
-  <span class="n">cab</span><span class="o">[</span><span class="s1">&#39;properties&#39;</span><span class="o">]</span>
-  <span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;lat&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;123&quot;</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;321&quot;</span><span class="p">,</span> <span class="s2">&quot;active&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
+<div class="highlight"><pre><code class="ruby"><span class="n">cab</span> <span class="o">=</span> <span class="no">Cab</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="p">{</span> <span class="ss">lat</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="ss">lng</span><span class="p">:</span> <span class="mi">321</span><span class="p">,</span> <span class="ss">active</span><span class="p">:</span> <span class="kp">true</span> <span class="p">})</span>
+<span class="n">cab</span><span class="o">[</span><span class="s1">&#39;properties&#39;</span><span class="o">]</span>
+<span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;lat&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;123&quot;</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;321&quot;</span><span class="p">,</span> <span class="s2">&quot;active&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;true&quot;</span><span class="p">}</span>
 </code></pre></div>
 
 <h4 id="as-keysvalues-do-hstore-armazenado-sempre-sero-convertidos-em-strings-no-importando-o-objeto-ruby-o-postgres-armazena-apenas-strings-nestes-campos">As keys/values do hstore armazenado sempre serão convertidos em strings, não importando o objeto ruby. O postgres armazena apenas strings nestes campos.</h4>
@@ -180,41 +180,41 @@ possibilitando queries e indexações desses dados de maneira simples e rápida.
 
 <p>Contem a key ‘active’</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties ? &#39;active&#39;&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties ? &#39;active&#39;&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 <p>Onde a key ‘lat’ for ‘123’</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;lat&#39; = &#39;123&#39;&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;lat&#39; = &#39;123&#39;&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 <p>A mesma query 2x mais rápida (utilizando indexes)</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;data @&gt; &#39;foo=&gt;bar&#39;&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;data @&gt; &#39;foo=&gt;bar&#39;&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 <p>Onde ‘active’ for diferente de ‘true’:</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;active&#39; &lt;&gt; &#39;true&#39;&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;active&#39; &lt;&gt; &#39;true&#39;&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 <h4 id="j-que-o-hstore-converte-todas-keysvalues-para-string-ateno-ao-fazer-boolean-queries-sempre-force-um-tos-para-garantir">Já que o hstore converte todas keys/values para string, atenção ao fazer boolean queries, sempre force um <em>.to_s</em> para garantir.</h4>
 
 <p>Objetos onde ‘lng’ se parece com ‘23’</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;lng&#39; LIKE &#39;%23%&#39;&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;lng&#39; LIKE &#39;%23%&#39;&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 <h2 id="armazenando-listas-como-valor">Armazenando listas como valor</h2>
 
 <p>Já sabemos que o Hstore transforma keys/values em strings, mas ainda assim podemos armazenar listas como valor. Elas são persistidas e retornam em formato <em>Json</em>, o que torna o <em>parse</em> muito fácil.</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="n">cab</span> <span class="o">=</span> <span class="no">Cab</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="p">{</span> <span class="ss">lat</span><span class="p">:</span> <span class="mi">11122</span><span class="p">,</span> <span class="ss">lng</span><span class="p">:</span> <span class="mi">33221</span><span class="p">,</span> <span class="ss">drivers</span><span class="p">:</span> <span class="o">[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span> <span class="p">})</span>
-  <span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span>
-  <span class="o">=&gt;</span> <span class="s2">&quot;[&#39;Donnie&#39;, &#39;Jane&#39;]&quot;</span>
+<div class="highlight"><pre><code class="ruby"><span class="n">cab</span> <span class="o">=</span> <span class="no">Cab</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="p">{</span> <span class="ss">lat</span><span class="p">:</span> <span class="mi">11122</span><span class="p">,</span> <span class="ss">lng</span><span class="p">:</span> <span class="mi">33221</span><span class="p">,</span> <span class="ss">drivers</span><span class="p">:</span> <span class="o">[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span> <span class="p">})</span>
+<span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span>
+<span class="o">=&gt;</span> <span class="s2">&quot;[&#39;Donnie&#39;, &#39;Jane&#39;]&quot;</span>
 
-  <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span><span class="p">)</span>
-  <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span>
+<span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span>
 </code></pre></div>
 
 <h4 id="hashes-nested-no-funcionam-o-hash-interno--convertido-em-string-e-o-postgres-no-consegue-montar-um-json-de-retorno-pra-esse-valor-uma-soluo-que-no-recomendo--a-utilizao-do-mtodo-eval-na-hash-string-retornada-tendncias-cabalisticas">Hashes nested não funcionam. O hash interno é convertido em string, e o postgres não consegue montar um <em>Json</em> de retorno pra esse valor. Uma solução que não recomendo é a utilização do método <em>eval</em> na hash string retornada (tendências cabalisticas).</h4>
@@ -223,9 +223,9 @@ possibilitando queries e indexações desses dados de maneira simples e rápida.
 
 <p>Uma vantagem bem legal do hstore é a similaridade ao mundo NoSql, onde novas keys/values podem ser inseridas a qualquer momento, de maneira bem fácil. Por exemplo, podemos decidir inserir a numeração da placa do nosso <em>Cab</em>, mas nem todos objetos precisam ter esse atributo. Reparem que faço um merge dos atributos antigos para não perde-los.</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="n">cab</span><span class="o">.</span><span class="n">update!</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">plate</span><span class="p">:</span> <span class="s1">&#39;XXX3344&#39;</span><span class="p">))</span>
-  <span class="n">cab</span><span class="o">.</span><span class="n">properties</span>
-  <span class="o">=&gt;</span> <span class="p">{</span> <span class="s2">&quot;lat&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;11122&quot;</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;33221&quot;</span><span class="p">,</span> <span class="s2">&quot;active&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;drivers&quot;</span><span class="o">=&gt;[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span><span class="p">,</span> <span class="s2">&quot;plate&quot;</span><span class="o">=&gt;</span><span class="s1">&#39;XXX3344&#39;</span> <span class="p">}</span>
+<div class="highlight"><pre><code class="ruby"><span class="n">cab</span><span class="o">.</span><span class="n">update!</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">plate</span><span class="p">:</span> <span class="s1">&#39;XXX3344&#39;</span><span class="p">))</span>
+<span class="n">cab</span><span class="o">.</span><span class="n">properties</span>
+<span class="o">=&gt;</span> <span class="p">{</span> <span class="s2">&quot;lat&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;11122&quot;</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;33221&quot;</span><span class="p">,</span> <span class="s2">&quot;active&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;drivers&quot;</span><span class="o">=&gt;[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span><span class="p">,</span> <span class="s2">&quot;plate&quot;</span><span class="o">=&gt;</span><span class="s1">&#39;XXX3344&#39;</span> <span class="p">}</span>
 </code></pre></div>
 
 <h2 id="acessando-valores-de-maneira-simples">Acessando valores de maneira simples</h2>
@@ -234,22 +234,22 @@ possibilitando queries e indexações desses dados de maneira simples e rápida.
   <li>Podemos criar manualmente os accessors de nossas propriedades</li>
 </ol>
 
-<div class="highlight"><pre><code class="ruby">  <span class="k">def</span> <span class="nf">drivers</span>
-    <span class="nb">self</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span>
-  <span class="k">end</span>
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">drivers</span>
+  <span class="nb">self</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span>
+<span class="k">end</span>
 </code></pre></div>
 
 <ol>
   <li>Ou podemos utilizar o accessor helper</li>
 </ol>
 
-<div class="highlight"><pre><code class="ruby">  <span class="n">store_accessor</span> <span class="ss">:properties</span><span class="p">,</span> <span class="ss">:drivers</span>
+<div class="highlight"><pre><code class="ruby"><span class="n">store_accessor</span> <span class="ss">:properties</span><span class="p">,</span> <span class="ss">:drivers</span>
 </code></pre></div>
 
 <h4 id="o-storeaccessor-ainda-habilita-a-utilizao-das-validaes-de-atributos-do-rails">O store_accessor ainda habilita a utilização das validações de atributos do Rails.</h4>
 
-<div class="highlight"><pre><code class="ruby">  <span class="n">store_accessor</span> <span class="ss">:properties</span><span class="p">,</span> <span class="ss">:lat</span><span class="p">,</span> <span class="ss">:lng</span>
-  <span class="n">validates</span> <span class="ss">:lat</span><span class="p">,</span> <span class="ss">:lng</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+<div class="highlight"><pre><code class="ruby"><span class="n">store_accessor</span> <span class="ss">:properties</span><span class="p">,</span> <span class="ss">:lat</span><span class="p">,</span> <span class="ss">:lng</span>
+<span class="n">validates</span> <span class="ss">:lat</span><span class="p">,</span> <span class="ss">:lng</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
 </code></pre></div>
 
 <h2 id="concluindo">Concluindo</h2>
@@ -288,7 +288,7 @@ seria optar por um banco de dados nosql.</p>
 
 
         </div>
-        <p class="byline"><strong>Armazenando em Hstore - Pitfalls &amp; Hints</strong> foi publicado em <time datetime="2014-09-29T00:00:00-04:00">September 29, 2014</time> and last modified on <time datetime="2014-09-29">September 29, 2014</time> by <a href="http://oswaldoferreira.github.io/about" title="About Oswaldo Ferreira">Oswaldo Ferreira</a>.</p>
+        <p class="byline"><strong>Armazenando em Hstore - Pitfalls &amp; Hints</strong> foi publicado em <time datetime="2014-09-29T00:00:00-04:00">September 29, 2014</time> and last modified on <time datetime="2014-09-30">September 30, 2014</time> by <a href="http://oswaldoferreira.github.io/about" title="About Oswaldo Ferreira">Oswaldo Ferreira</a>.</p>
         
           <div class="sharing">
   <ul id="menu" style="display: inline-flex; list-style: none; padding-left: 0px;">
