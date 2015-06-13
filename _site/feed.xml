@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-<title type="text">Developer's Brainstorming</title>
+<title type="text">self.blog</title>
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://oswaldoferreira.github.io/feed.xml" />
-<link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io" />
-<updated>2014-10-01T20:10:35-04:00</updated>
-<id>http://oswaldoferreira.github.io/</id>
+<link rel="self" type="application/atom+xml" href="http://oswaldo.me/feed.xml" />
+<link rel="alternate" type="text/html" href="http://oswaldo.me" />
+<updated>2015-06-13T11:36:51-04:00</updated>
+<id>http://oswaldo.me/</id>
 <author>
   <name>Oswaldo Ferreira</name>
-  <uri>http://oswaldoferreira.github.io/</uri>
+  <uri>http://oswaldo.me/</uri>
   <email>oswluizf@gmail.com</email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[Armazenando em Hstore - Pitfalls &amp; Hints]]></title>
-  <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io/2014/09/29/hstore-pitfalls-and-hints.html" />
-  <id>http://oswaldoferreira.github.io/2014/09/29/hstore-pitfalls-and-hints</id>
-  <updated>2014-09-30 01:49:50 UTCT00:00:00-00:00</updated>
+  <link rel="alternate" type="text/html" href="http://oswaldo.me/2014/09/29/hstore-pitfalls-and-hints.html" />
+  <id>http://oswaldo.me/2014/09/29/hstore-pitfalls-and-hints</id>
+  <updated>2014-09-29 21:49:50 -0400T00:00:00-00:00</updated>
   <published>2014-09-29T00:00:00-04:00</published>
   
   <author>
     <name>Oswaldo Ferreira</name>
-    <uri>http://oswaldoferreira.github.io</uri>
+    <uri>http://oswaldo.me</uri>
     <email>oswluizf@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;O hstore é utilizado para serializar e armazenar estruturas Hash no Postgres,
@@ -146,32 +146,30 @@ possibilitando queries e indexações desses dados de maneira simples e rápida.
 
 &lt;h2 id=&quot;concluindo&quot;&gt;Concluindo&lt;/h2&gt;
 
-&lt;p&gt;O hstore facilita demais o armazenamento à nível flat (um nível). Já que
+&lt;p&gt;O hstore facilita demais o manejo de flat hashes (um nível de nesting). Já que
 temos acesso às validações do Rails, podemos assegurar um tipo de dado de um atributo,
 e apenas fazer a conversão no caminho de volta.&lt;/p&gt;
 
-&lt;p&gt;Se o caso for mais complexo, envolvendo nested hashes, uma das opções é a utilização
+&lt;p&gt;Se o caso for mais complexo, envolvendo nested hashes e mais “relações”, uma das opções é a utilização
 do formato JSON, onde acabariamos abrindo mão de benefícios que o Hstore
-proporciona (como queries, indexes, etc). No entando, o melhor dos mundos
-seria optar por um banco de dados nosql.&lt;/p&gt;
-
-&lt;p&gt;Então ficamos por aqui, qualquer dúvida ou ajuste só entrar em contato.&lt;/p&gt;
+proporciona (como queries, indexes, etc). No entando, o melhor dos mundos neste
+caso seria optar por um banco NoSql, como MongoDB, CouchDB, entre outros.&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://oswaldoferreira.github.io/2014/09/29/hstore-pitfalls-and-hints.html&quot;&gt;Armazenando em Hstore - Pitfalls &amp; Hints&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldoferreira.github.io&quot;&gt;Developer's Brainstorming&lt;/a&gt; on September 29, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://oswaldo.me/2014/09/29/hstore-pitfalls-and-hints.html&quot;&gt;Armazenando em Hstore - Pitfalls &amp; Hints&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldo.me&quot;&gt;self.blog&lt;/a&gt; on September 29, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Introdução à Mock e Stub com Rspec]]></title>
-  <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby.html" />
-  <id>http://oswaldoferreira.github.io/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby</id>
-  <updated>2014-08-29 03:09:53 UTCT00:00:00-00:00</updated>
+  <link rel="alternate" type="text/html" href="http://oswaldo.me/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby.html" />
+  <id>http://oswaldo.me/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby</id>
+  <updated>2014-08-28 23:09:53 -0400T00:00:00-00:00</updated>
   <published>2014-08-29T00:00:00-04:00</published>
   
   <author>
     <name>Oswaldo Ferreira</name>
-    <uri>http://oswaldoferreira.github.io</uri>
+    <uri>http://oswaldo.me</uri>
     <email>oswluizf@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Em determinadas situações, onde múltiplas classes são desenvolvidas quase simultaneamente,
@@ -233,20 +231,20 @@ por exemplo.&lt;/p&gt;
 &lt;/ul&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://oswaldoferreira.github.io/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby.html&quot;&gt;Introdução à Mock e Stub com Rspec&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldoferreira.github.io&quot;&gt;Developer's Brainstorming&lt;/a&gt; on August 29, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://oswaldo.me/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby.html&quot;&gt;Introdução à Mock e Stub com Rspec&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldo.me&quot;&gt;self.blog&lt;/a&gt; on August 29, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Melhorando seu workflow no Rails com Spring]]></title>
-  <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html" />
-  <id>http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring</id>
-  <updated>2014-05-26 22:30:34 UTCT00:00:00-00:00</updated>
+  <link rel="alternate" type="text/html" href="http://oswaldo.me/2014/05/26/melhorando-workflow-com-spring.html" />
+  <id>http://oswaldo.me/2014/05/26/melhorando-workflow-com-spring</id>
+  <updated>2014-05-26 18:30:34 -0400T00:00:00-00:00</updated>
   <published>2014-05-26T00:00:00-04:00</published>
   
   <author>
     <name>Oswaldo Ferreira</name>
-    <uri>http://oswaldoferreira.github.io</uri>
+    <uri>http://oswaldo.me</uri>
     <email>oswluizf@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;Dia 18/04/2014 foi lançada a tão esperada versão 4.1 do Rails. Nessa release
@@ -319,19 +317,19 @@ specs que utilizam Date, Time, e DateTime. Neste caso utilize &lt;strong&gt;spri
 &lt;/ul&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://oswaldoferreira.github.io/2014/05/26/melhorando-workflow-com-spring.html&quot;&gt;Melhorando seu workflow no Rails com Spring&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldoferreira.github.io&quot;&gt;Developer's Brainstorming&lt;/a&gt; on May 26, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://oswaldo.me/2014/05/26/melhorando-workflow-com-spring.html&quot;&gt;Melhorando seu workflow no Rails com Spring&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldo.me&quot;&gt;self.blog&lt;/a&gt; on May 26, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Criando e testando uma API básica no Rails]]></title>
-  <link rel="alternate" type="text/html" href="http://oswaldoferreira.github.io/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html" />
-  <id>http://oswaldoferreira.github.io/2014/05/09/criando-e-testando-uma-api-basica-em-rails</id>
+  <link rel="alternate" type="text/html" href="http://oswaldo.me/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html" />
+  <id>http://oswaldo.me/2014/05/09/criando-e-testando-uma-api-basica-em-rails</id>
   <published>2014-05-09T00:00:00-04:00</published>
   <updated>2014-05-09T00:00:00-04:00</updated>
   <author>
     <name>Oswaldo Ferreira</name>
-    <uri>http://oswaldoferreira.github.io</uri>
+    <uri>http://oswaldo.me</uri>
     <email>oswluizf@gmail.com</email>
   </author>
   <content type="html">&lt;h2 id=&quot;rails--http&quot;&gt;Rails &amp;amp; HTTP&lt;/h2&gt;
@@ -415,7 +413,7 @@ autenticação/autorização com as gems Devise e Cancan, tornando sua API mais 
 &lt;p&gt;Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aqui..&lt;/p&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;http://oswaldoferreira.github.io/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html&quot;&gt;Criando e testando uma API básica no Rails&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldoferreira.github.io&quot;&gt;Developer's Brainstorming&lt;/a&gt; on May 09, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://oswaldo.me/2014/05/09/criando-e-testando-uma-api-basica-em-rails.html&quot;&gt;Criando e testando uma API básica no Rails&lt;/a&gt; was originally published by Oswaldo Ferreira at &lt;a href=&quot;http://oswaldo.me&quot;&gt;self.blog&lt;/a&gt; on May 09, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>

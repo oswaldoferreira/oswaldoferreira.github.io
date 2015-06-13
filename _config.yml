@@ -1,7 +1,7 @@
-title:            Developer's Brainstorming
-description:      "Ruby, Rails e outras tecnologias"
+title:            "self.blog"
+description:      "Desenvolvimento web em geral"
 # Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              http://oswaldoferreira.github.io
+url:              http://oswaldo.me
 
 date_format: "%d/%m/%Y"
 
@@ -9,15 +9,14 @@ date_format: "%d/%m/%Y"
 owner:
   name:           Oswaldo Ferreira
   avatar:         bio-photo.jpg
-  # bio:            "I am a web developer at Algorich and graduating Information System's studant at IFF"
-  bio:            "Developer at Algorich, technology enthusiast, traveler and professional music crawler."
+  bio:            "Olá! Sou desenvolvedor web na HE:labs e este é meu blog pessoal."
   email:          oswluizf@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
   twitter: oswferreira
   facebook:
   github: oswaldoferreira
-  stackoverflow:
-  linkedin:
+  stackoverflow: oswaldo-ferreira
+  linkedin: oswaldoferreira
   instagram:
   lastfm:
   tumblr:
@@ -25,8 +24,6 @@ owner:
   foursquare:
   steam:
   dribbble:
-  # For Google Authorship https://plus.google.com/authorship
-  google_plus: oswaldofer
 
 # Analytics and webmaster tools stuff goes here
 google_analytics: UA-50742105-2
