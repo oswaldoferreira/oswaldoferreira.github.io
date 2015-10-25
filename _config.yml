@@ -1,5 +1,5 @@
 title:            "self.blog"
-description:      "Desenvolvimento web em geral"
+description:      ""
 # Your site's domain goes here. Leave localhost server or blank when working locally.
 url:              http://oswaldo.me
 
@@ -9,7 +9,6 @@ date_format: "%d/%m/%Y"
 owner:
   name:           Oswaldo Ferreira
   avatar:         bio-photo.jpg
-  bio:            "Olá! Sou desenvolvedor web na HE:labs e este é meu blog pessoal."
   email:          oswluizf@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
   twitter: oswferreira
