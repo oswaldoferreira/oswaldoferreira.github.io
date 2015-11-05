@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Armazenando em Hstore - Pitfalls &amp; Hints &middot; Oswaldo Ferreira
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Oswaldo Ferreira
+        </a>
+      </h1>
+      <p class="lead">All about code.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Posts</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Armazenando em Hstore - Pitfalls &amp; Hints</h1>
+  <span class="post-date">29 Sep 2014</span>
+  <p>O hstore é utilizado para serializar e armazenar estruturas Hash no Postgres,
+possibilitando queries e indexações desses dados de maneira simples e rápida. Neste post indicarei pitfalls e hints enquanto percorremos grande parte das possibilidades dessa ferramenta.</p>
+
+<h2>Utilização</h2>
+
+<p>Normalmente, ele é utilizado quando precisamos armazenar dados que não possuem grandes vínculos no sistema, que tendem a se multiplicar, e não possuem atributos tão fixos. Bons candidatos ao Hstore: localização e histórico.</p>
+
+<h2>Setup (Migration):</h2>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">SetupHstore</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
+    <span class="n">execute</span> <span class="s2">&quot;CREATE EXTENSION IF NOT EXISTS hstore&quot;</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">down</span>
+    <span class="n">execute</span> <span class="s2">&quot;DROP EXTENSION IF EXISTS hstore&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<h2>Criando uma tabela com atributo Hstore (Migration):</h2>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">CreateCabs</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">create_table</span> <span class="ss">:cab</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">float</span> <span class="ss">:traveled_distance</span>
+      <span class="n">t</span><span class="o">.</span><span class="n">hstore</span> <span class="ss">:properties</span>
+
+      <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<h2>Playing around</h2>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">cab</span> <span class="o">=</span> <span class="no">Cab</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="p">{</span> <span class="ss">lat</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span> <span class="ss">lng</span><span class="p">:</span> <span class="mi">321</span><span class="p">,</span> <span class="ss">active</span><span class="p">:</span> <span class="kp">true</span> <span class="p">})</span>
+<span class="n">cab</span><span class="o">[</span><span class="s1">&#39;properties&#39;</span><span class="o">]</span>
+<span class="o">=&gt;</span> <span class="p">{</span><span class="s2">&quot;lat&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;123&quot;</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;321&quot;</span><span class="p">,</span> <span class="s2">&quot;active&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;true&quot;</span><span class="p">}</span></code></pre></figure>
+
+<h4>As keys/values do hstore armazenado sempre serão convertidos em strings, não importando o objeto ruby. O postgres armazena apenas strings nestes campos.</h4>
+
+<h2>Query</h2>
+
+<p>Contem a key &#39;active&#39;</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties ? &#39;active&#39;&quot;</span><span class="p">)</span></code></pre></figure>
+
+<p>Onde a key &#39;lat&#39; for &#39;123&#39;</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;lat&#39; = &#39;123&#39;&quot;</span><span class="p">)</span></code></pre></figure>
+
+<p>A mesma query 2x mais rápida (utilizando indexes)</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;data @&gt; &#39;foo=&gt;bar&#39;&quot;</span><span class="p">)</span></code></pre></figure>
+
+<p>Onde &#39;active&#39; for diferente de &#39;true&#39;:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;active&#39; &lt;&gt; &#39;true&#39;&quot;</span><span class="p">)</span></code></pre></figure>
+
+<h4>Já que o hstore converte todas keys/values para string, atenção ao fazer boolean queries, sempre force um <em>.to_s</em> para garantir.</h4>
+
+<p>Objetos onde &#39;lng&#39; se parece com &#39;23&#39;</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="no">Cab</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;properties -&gt; &#39;lng&#39; LIKE &#39;%23%&#39;&quot;</span><span class="p">)</span></code></pre></figure>
+
+<h2>Armazenando listas como valor</h2>
+
+<p>Já sabemos que o Hstore transforma keys/values em strings, mas ainda assim podemos armazenar listas como valor. Elas são persistidas e retornam em formato <em>Json</em>, o que torna o <em>parse</em> muito fácil.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">cab</span> <span class="o">=</span> <span class="no">Cab</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="p">{</span> <span class="ss">lat</span><span class="p">:</span> <span class="mi">11122</span><span class="p">,</span> <span class="ss">lng</span><span class="p">:</span> <span class="mi">33221</span><span class="p">,</span> <span class="ss">drivers</span><span class="p">:</span> <span class="o">[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span> <span class="p">})</span>
+<span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span>
+<span class="o">=&gt;</span> <span class="s2">&quot;[&#39;Donnie&#39;, &#39;Jane&#39;]&quot;</span>
+
+<span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span><span class="p">)</span>
+<span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span></code></pre></figure>
+
+<h4>Hashes nested não funcionam. O hash interno é convertido em string, e o postgres não consegue montar um <em>Json</em> de retorno pra esse valor. Uma solução que não recomendo é a utilização do método <em>eval</em> na hash string retornada (tendências cabalisticas).</h4>
+
+<h2>Adicionando atributos extras (coool)</h2>
+
+<p>Uma vantagem bem legal do hstore é a similaridade ao mundo NoSql, onde novas keys/values podem ser inseridas a qualquer momento, de maneira bem fácil. Por exemplo, podemos decidir inserir a numeração da placa do nosso <em>Cab</em>, mas nem todos objetos precisam ter esse atributo. Reparem que faço um merge dos atributos antigos para não perde-los.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">cab</span><span class="o">.</span><span class="n">update!</span><span class="p">(</span><span class="ss">properties</span><span class="p">:</span> <span class="n">cab</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="ss">plate</span><span class="p">:</span> <span class="s1">&#39;XXX3344&#39;</span><span class="p">))</span>
+<span class="n">cab</span><span class="o">.</span><span class="n">properties</span>
+<span class="o">=&gt;</span> <span class="p">{</span> <span class="s2">&quot;lat&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;11122&quot;</span><span class="p">,</span> <span class="s2">&quot;lng&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;33221&quot;</span><span class="p">,</span> <span class="s2">&quot;active&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;drivers&quot;</span><span class="o">=&gt;[</span><span class="s1">&#39;Donnie&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="o">]</span><span class="p">,</span> <span class="s2">&quot;plate&quot;</span><span class="o">=&gt;</span><span class="s1">&#39;XXX3344&#39;</span> <span class="p">}</span></code></pre></figure>
+
+<h2>Acessando valores de maneira simples</h2>
+
+<ol>
+<li>Podemos criar manualmente os accessors de nossas propriedades</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">drivers</span>
+  <span class="nb">self</span><span class="o">.</span><span class="n">properties</span><span class="o">[</span><span class="s1">&#39;drivers&#39;</span><span class="o">]</span>
+<span class="k">end</span></code></pre></figure>
+
+<ol>
+<li>Ou podemos utilizar o accessor helper</li>
+</ol>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">store_accessor</span> <span class="ss">:properties</span><span class="p">,</span> <span class="ss">:drivers</span></code></pre></figure>
+
+<h4>O store_accessor ainda habilita a utilização das validações de atributos do Rails.</h4>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">store_accessor</span> <span class="ss">:properties</span><span class="p">,</span> <span class="ss">:lat</span><span class="p">,</span> <span class="ss">:lng</span>
+<span class="n">validates</span> <span class="ss">:lat</span><span class="p">,</span> <span class="ss">:lng</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span></code></pre></figure>
+
+<h2>Concluindo</h2>
+
+<p>O hstore facilita demais o manejo de flat hashes (um nível de nesting). Já que
+temos acesso às validações do Rails, podemos assegurar um tipo de dado de um atributo,
+e apenas fazer a conversão no caminho de volta.</p>
+
+<p>Se o caso for mais complexo, envolvendo nested hashes e mais &quot;relações&quot;, uma das opções é a utilização
+do formato JSON, onde acabariamos abrindo mão de benefícios que o Hstore
+proporciona (como queries, indexes, etc). No entando, o melhor dos mundos neste
+caso seria optar por um banco NoSql, como MongoDB, CouchDB, entre outros.</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2014/09/29/hstore-pitfalls-and-hints/">
+            Armazenando em Hstore - Pitfalls &amp; Hints
+            <small>29 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/public/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby/">
+            Introdução à Mock e Stub com Rspec
+            <small>29 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby/">
+            Introdução à Mock e Stub com Rspec
+            <small>29 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -2,15 +2,7 @@
 layout: post
 title: "Melhorando seu workflow no Rails com Spring"
 description: "Highlights do novo preloader nativo do Rails 4.1"
-modified: 2014-05-26 19:30:34 -0300
-tags: [rails, 4.1, ruby, spring, preloader]
-image:
-  feature: texture-feature-X2.jpg
-  credit:
-  creditlink:
-share:
 comments: true
-published: true
 ---
 
 Dia 18/04/2014 foi lançada a tão esperada versão 4.1 do Rails. Nessa release

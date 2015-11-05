@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Introdução à Mock e Stub com Rspec &middot; Oswaldo Ferreira
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Oswaldo Ferreira
+        </a>
+      </h1>
+      <p class="lead">All about code.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Posts</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+          
+        
+      
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Introdução à Mock e Stub com Rspec</h1>
+  <span class="post-date">29 Aug 2014</span>
+  <p>Em determinadas situações, onde múltiplas classes são desenvolvidas quase simultaneamente,
+  podemos utilizar objetos <em>fake</em> para criar suas relações. Essa técnica possui uma função simples e bem definida, manter a aplicação isoladamente testada.</p>
+
+<p>A utilização do <strong>mock</strong> permite gerar objetos que fazem o papel de dublê de outra classe (que muitas vezes ainda nem foi criada) em um teste, ou seja, retiramos a necessidade (dependência) da classe que não estamos testando neste momento.</p>
+
+<p>O <strong>stub</strong> nada mais é que uma saída forjada para uma chamada à um objeto, ou seja,
+ele responde como queremos à mensagens enviadas, atuando como um dublê de métodos.</p>
+
+<h3>Exemplo</h3>
+
+<p>Vamos estabelecer o seguinte exemplo bem abstrato aplicando o
+<a href="http://pt.wikipedia.org/wiki/Test_Driven_Development">TDD</a>:</p>
+
+<h4>“Uma pessoa só é feliz quando está no Park&quot;</h4>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">  <span class="n">describe</span> <span class="no">Person</span> <span class="k">do</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:place</span><span class="p">)</span>  <span class="p">{</span> <span class="n">double</span><span class="p">(</span><span class="s1">&#39;Place&#39;</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">let</span><span class="p">(</span><span class="ss">:person</span><span class="p">)</span> <span class="p">{</span> <span class="no">Person</span><span class="o">.</span><span class="n">new</span> <span class="ss">place</span><span class="p">:</span> <span class="n">place</span> <span class="p">}</span>
+
+    <span class="n">describe</span> <span class="s1">&#39;is_happy?&#39;</span> <span class="k">do</span>
+      <span class="n">it</span> <span class="s1">&#39;when true&#39;</span> <span class="k">do</span>
+        <span class="n">place</span><span class="o">.</span><span class="n">stub</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">and_return</span><span class="p">(</span><span class="s1">&#39;Park&#39;</span><span class="p">)</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">is_happy?</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_true</span>
+      <span class="k">end</span>
+
+      <span class="n">it</span> <span class="s1">&#39;when false&#39;</span> <span class="k">do</span>
+        <span class="n">place</span><span class="o">.</span><span class="n">stub</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">and_return</span><span class="p">(</span><span class="s1">&#39;Any other place&#39;</span><span class="p">)</span>
+        <span class="n">expect</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">is_happy?</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_false</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">  <span class="k">class</span> <span class="nc">Person</span>
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="vi">@place</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:place</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">def</span> <span class="nf">is_happy?</span>
+      <span class="n">place</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Park&#39;</span>
+    <span class="k">end</span>
+  <span class="k">end</span></code></pre></figure>
+
+<p>Neste exemplo testamos qual seria a influência de uma classe externa (Place),
+que ainda não existe. Reparem na utilização do <strong>double(&#39;Place&#39;)</strong> e o <strong>stub(:name)</strong>.
+O <em>double</em> é o mock de place, ou seja, um objeto fictício, enquanto o <em>stub</em> gera
+um método em cima do mock. Sendo assim, podemos testar os envios de mensagem internamente,
+criando no próprio teste um contrato de como será implementada sua classe <strong>Place</strong>,
+por exemplo.</p>
+
+<h3>Links importantes</h3>
+
+<ul>
+<li>Syntax <a href="https://relishapp.com/rspec/rspec-mocks/docs">Mock &amp; Stub</a></li>
+<li>Interessado em TDD? <a href="http://www.amazon.com/Test-Driven-Development-By-Example/dp/0321146530">Test Driven Development: By Example</a></li>
+</ul>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2014/09/29/hstore-pitfalls-and-hints/">
+            Armazenando em Hstore - Pitfalls &amp; Hints
+            <small>29 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/05/26/melhorando-workflow-com-spring/">
+            Melhorando seu workflow no Rails com Spring
+            <small>26 May 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/05/09/criando-e-testando-uma-api-basica-em-rails/">
+            Criando e testando uma API básica no Rails
+            <small>09 May 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

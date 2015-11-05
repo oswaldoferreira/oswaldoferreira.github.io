@@ -1,101 +1,32 @@
-title:            "self.blog"
-description:      ""
-# Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              http://oswaldo.me
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
 
-date_format: "%d/%m/%Y"
+# Permalinks
+permalink:        pretty
+relative_permalinks: false
 
-# Owner/author information
-owner:
-  name:           Oswaldo Ferreira
-  avatar:         bio-photo.jpg
-  email:          oswluizf@gmail.com
-  # Social networking links are used in author-bio sidebar. Update and remove as you like.
-  twitter: oswferreira
-  facebook:
-  github: oswaldoferreira
-  stackoverflow: oswaldo-ferreira
-  linkedin: oswaldoferreira
-  instagram:
-  lastfm:
-  tumblr:
-  pinterest:
-  foursquare:
-  steam:
-  dribbble:
+# Setup
+title:            'Oswaldo Ferreira'
+tagline:          'Tagline teste'
+description:      'All about code.'
+url:              http://hyde.getpoole.com
+baseurl:          /
 
-# Analytics and webmaster tools stuff goes here
-google_analytics: UA-50742105-2
-google_verify:
-# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-bing_verify:
+author:
+  name:           'Oswaldo Ferreira'
+  url:            https://twitter.com/oswferreira
 
-# Links to include in top navigation
-# For external links add external: true
-links:
-  - title: Posts
-    url: /posts/
+paginate: 10
 
-# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/New_York
-future:      true
-pygments:    true
-markdown:    kramdown
+gems:
+  - jekyll-paginate
+  - redcarpet
+  - jekyll-gist
+  - pygments.rb
 
-# https://github.com/mojombo/jekyll/wiki/Permalinks
-relative_permalinks: true
-permalink: date
+# Custom vars
+version:          2.1.0
 
-kramdown:
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  use_coderay: false
-
-  coderay:
-    coderay_line_numbers:
-    coderay_line_numbers_start: 1
-    coderay_tab_width: 4
-    coderay_bold_every: 10
-    coderay_css: class
-
-include: [".htaccess"]
-exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
-
-# ----------------------- #
-#   3rd Party Settings    #
-# ----------------------- #
-
-# Github repositories
-github_user: oswaldoferreira
-github_repo_count: 4
-github_show_profile_link: true
-github_skip_forks: true
-
-# Twitter
-twitter_user: oswferreira
-twitter_tweet_count: 4
-twitter_show_replies: false
-twitter_follow_button: true
-twitter_show_follower_count: false
-twitter_tweet_button: true
-
-# Google +1
-google_plus_one: false
-google_plus_one_size: medium
-
-# Google Plus Profile
-# Hidden: No visible button, just add author information to search results
-googleplus_user: oswaldofer
-googleplus_hidden: false
-
-# Disqus Comments
-disqus_shortname: oswaldoferreira
-disqus_show_comment_count: true
-
-# Google Analytics
-google_analytics_tracking_id: UA-50742105-2
-
-# Facebook Like
-facebook_like: true
+github:
+  repo:           https://github.com/poole/hyde

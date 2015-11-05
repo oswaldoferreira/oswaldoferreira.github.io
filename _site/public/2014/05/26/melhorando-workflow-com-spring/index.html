@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Melhorando seu workflow no Rails com Spring &middot; Oswaldo Ferreira
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Oswaldo Ferreira
+        </a>
+      </h1>
+      <p class="lead">All about code.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Posts</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Melhorando seu workflow no Rails com Spring</h1>
+  <span class="post-date">26 May 2014</span>
+  <p>Dia 18/04/2014 foi lançada a tão esperada versão 4.1 do Rails. Nessa release
+houveram grandes mudanças e features para tornar ainda mais eficiente
+nosso workflow, sem falar no aumento de segurança da framework. Uma das features
+introduzidas foi o <strong>Spring</strong>, uma ferramenta booter que recebeu melhorias e
+agora se torna built-in no Rails 4.1.</p>
+
+<h2>Spring</h2>
+
+<p>O spring é um preloader atualmente nativo que basicamente inicia sua aplicação
+em background, tornando extremamente mais rápida qualquer ação que inicie o
+ambiente de desenvolvimento do Rails, como specs, rake tasks e migrations.</p>
+
+<h3>Na prática</h3>
+
+<p>Inicializando uma pequena spec suite, temos os seguintes resultados sem a utlização do <strong>spring</strong>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  <span class="nb">time </span>rspec spec/models/.
+  ..
+
+  Finished in 14.38 seconds
+  <span class="m">520</span> examples, <span class="m">0</span> failures
+
+  18,38s user 2,11s system 94% cpu 21,742 total</code></pre></figure>
+
+<h4>Total: 21,74</h4>
+
+<p>São <strong>21.74</strong> segundos no total e <strong>14.38</strong> segundos rodando os testes,
+o que nos dá <strong>7.36 segundos de booting, esperando o teste começar a ser executado</strong>.</p>
+
+<p>Lembrando que este tempo irá variar pelo tamanho da aplicação, quantidade de
+gems e máquina utilizada.</p>
+
+<p>Após a execução do primeiro comando utilizando <em>spring</em>, sua aplicação já estará
+rodando em background, portanto a execução do primeiro comando será lenta,
+como no exemplo acima. A partir da segunda execução já podemos ver os resultados:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  <span class="nb">time </span>spring rspec spec/models/.
+  ..
+
+  Finished in 16.03 seconds
+  <span class="m">520</span> examples, <span class="m">0</span> failures, <span class="m">1</span> pending
+
+  0,08s user 0,02s system 0% cpu 17,728 total</code></pre></figure>
+
+<h4>Total: 17,73</h4>
+
+<p>Como podemos ver, ganhamos aproximadamente <strong>4 segundos</strong>, o que pode ser uma
+grande diferença para equipes que praticam TDD ou executam testes com grande frequência.</p>
+
+<h3>Conselhos &amp; Pitfalls</h3>
+
+<ul>
+<li>Setup rápido no <a href="https://github.com/rails/spring/blob/master/README.md">readme</a></li>
+<li>Você pode checar o status da sua aplicação pelo comando <strong>spring status</strong>.</li>
+<li>Evite manter a aplicação em background por mais de 1 dia, pois o spring
+não recarrega a aplicação de tempo em tempo, o que pode causar instabilidade em
+specs que utilizam Date, Time, e DateTime. Neste caso utilize <strong>spring stop</strong>.</li>
+</ul>
+
+<h2>Links</h2>
+
+<ul>
+<li>Guia de upgrade para Rails 4.1 - <a href="http://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-4-0-to-rails-4-1">Link</a>.</li>
+<li>Rails 4.1 Release Notes - <a href="http://edgeguides.rubyonrails.org/4_1_release_notes.html">Link</a></li>
+<li>Spring Gem - <a href="https://github.com/rails/spring/">Link</a></li>
+</ul>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/public/2014/09/29/hstore-pitfalls-and-hints/">
+            Armazenando em Hstore - Pitfalls &amp; Hints
+            <small>29 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/09/29/hstore-pitfalls-and-hints/">
+            Armazenando em Hstore - Pitfalls &amp; Hints
+            <small>29 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/public/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby/">
+            Introdução à Mock e Stub com Rspec
+            <small>29 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

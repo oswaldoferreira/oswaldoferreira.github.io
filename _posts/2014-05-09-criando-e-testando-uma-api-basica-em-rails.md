@@ -1,14 +1,7 @@
 ---
 layout: post
 title: Criando e testando uma API básica no Rails
-description: "Abordagem simples para utilização do Rails para servir dados para web."
 tags: [rspec, spec, rails, json, api]
-image:
-  feature: texture-feature-X2.jpg
-  credit:
-  creditlink:
-comments: true
-published: true
 ---
 
 ## Rails & HTTP
@@ -95,13 +88,3 @@ Este é um caso super simples, e claro, podemos melhora-lo utilizando mais model
 autenticação/autorização com as gems Devise e Cancan, tornando sua API mais completa e segura.
 
 Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aqui..
-
-
-
-
-
-
-
-
-
-

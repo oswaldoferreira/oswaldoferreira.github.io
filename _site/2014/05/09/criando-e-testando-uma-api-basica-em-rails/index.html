@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Criando e testando uma API básica no Rails &middot; Oswaldo Ferreira
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Oswaldo Ferreira
+        </a>
+      </h1>
+      <p class="lead">All about code.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Posts</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+          
+        
+      
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Criando e testando uma API básica no Rails</h1>
+  <span class="post-date">09 May 2014</span>
+  <h2>Rails &amp; HTTP</h2>
+
+<p>O rails é uma poderosa framework que nos permite desenvolver de forma ágil e produtiva,
+possibilitando foco no que realmente temos como fim, não como meio.</p>
+
+<p>Em vista disso, hoje iremos aprender como criar uma api simples para servir
+dados de nossas aplicações no formato <a href="http://pt.wikipedia.org/wiki/JSON">JSON</a>.</p>
+
+<p>Partindo do princípio básico do <a href="http://pt.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HTTP</a>,
+primeiramente precisamos de uma URL que responda à requisições <em>GET</em>.</p>
+
+<h2>routes.rb</h2>
+
+<p>Criando namespaces exclusivos para API nos ajudará a isolar comportamentos, direcionando para uma
+controller que terá o papel único de retornar dados em <em>JSON</em>. Neste caso estamos
+direcionando para controller <strong>api/v1/users_controller.rb</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby">  <span class="n">namespace</span> <span class="ss">:api</span> <span class="k">do</span>
+    <span class="n">namespace</span> <span class="ss">:v1</span> <span class="k">do</span>
+      <span class="n">get</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s1">&#39;users#index&#39;</span>
+    <span class="k">end</span>
+  <span class="k">end</span></code></pre></figure>
+
+<p>Output do <strong>rake routes</strong>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  api_v1_users GET  /api/v1/users<span class="o">(</span>.:format<span class="o">)</span> api/v1/users#index</code></pre></figure>
+
+<h3>api/v1/users_controller.rb</h3>
+
+<p>Nossa controller neste momento terá apenas uma action (index), e esta irá responder
+com todos os usuários de nossa aplicação.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+  <span class="k">def</span> <span class="nf">index</span>
+    <span class="vi">@users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span>
+    <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@users</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<h3>Specs</h3>
+
+<p>Neste caso estamos testando se o resposta da requisição HTTP é 200 (success),
+transformando o JSON em um Hash e validando seu retorno.</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">describe</span> <span class="no">Api</span><span class="o">::</span><span class="no">V1</span><span class="o">::</span><span class="no">UsersController</span> <span class="k">do</span>
+  <span class="n">context</span> <span class="s1">&#39;GET index&#39;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s1">&#39;when users&#39;</span> <span class="k">do</span>
+      <span class="no">User</span><span class="o">.</span><span class="n">create!</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="ss">birthday</span><span class="p">:</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;14/03/1991&#39;</span><span class="p">)</span>
+      <span class="n">get</span> <span class="s1">&#39;index&#39;</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_success</span>
+
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="o">[</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;birthday&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;1991-03-14&quot;</span><span class="p">}</span><span class="o">]</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s1">&#39;when no users&#39;</span> <span class="k">do</span>
+      <span class="n">get</span> <span class="s1">&#39;index&#39;</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">response</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_success</span>
+
+      <span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">json</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">be_empty</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></figure>
+
+<p>Com apenas isso já temos o necessário para responder requisições GET com todos
+objetos de usuários de nossa aplicação em formato <em>JSON</em>, possibilitando
+sua utilização por qualquer outra aplicação web.</p>
+
+<h3>E esse é o fim do início.</h3>
+
+<p>Este é um caso super simples, e claro, podemos melhora-lo utilizando mais models e
+autenticação/autorização com as gems Devise e Cancan, tornando sua API mais completa e segura.</p>
+
+<p>Em breve criarei um post mais completo e com mais exemplos, por enquanto ficamos por aqui..</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2014/09/29/hstore-pitfalls-and-hints/">
+            Armazenando em Hstore - Pitfalls &amp; Hints
+            <small>29 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby/">
+            Introdução à Mock e Stub com Rspec
+            <small>29 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/05/26/melhorando-workflow-com-spring/">
+            Melhorando seu workflow no Rails com Spring
+            <small>26 May 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
