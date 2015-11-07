@@ -4,13 +4,114 @@
  <title>Oswaldo Ferreira</title>
  <link href="http://hyde.getpoole.com/atom.xml" rel="self"/>
  <link href="http://hyde.getpoole.com/"/>
- <updated>2015-11-05T01:12:03-02:00</updated>
+ <updated>2015-11-07T19:57:22-02:00</updated>
  <id>http://hyde.getpoole.com</id>
  <author>
    <name>Oswaldo Ferreira</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>First steps on VIM</title>
+   <link href="http://hyde.getpoole.com/2015/10/25/first-steps-on-vim/"/>
+   <updated>2015-10-25T00:00:00-02:00</updated>
+   <id>http://hyde.getpoole.com/2015/10/25/first-steps-on-vim</id>
+   <content type="html">&lt;p&gt;So you’re planning to starting using vim but doesn’t want to afford the initial learning curve. You don’t want to let your productivity go down on your daily basis work. I’ll tell you something, there’s not a magic recipe, or even a secret way of learning it without actually struggling around with it for at least one week. But don’t feel bad already, c’mon put a smile on that face and let’s just DO IT.&lt;/p&gt;
+
+&lt;p&gt;Take that vim guru in action to warm you up&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://33.media.tumblr.com/ec4935a645d0003a128a1f7cb12ca377/tumblr_inline_nsu3wtXBIv1raprkq_500.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;You probably already read tons of posts talking about &lt;a href=&quot;http://yehudakatz.com/2010/07/29/everyone-who-tried-to-convince-me-to-use-vim-was-wrong/&quot;&gt;why you should use vim&lt;/a&gt; instead IDE’s or “ready for action” editors out there, so I’ll focus on the VIM survivability path.&lt;/p&gt;
+
+&lt;p&gt;I’ve been using only vim for just 4 months for now and I can say that i’m feeling twice (or even more) as productive compared to my &lt;a href=&quot;https://medium.com/@mkozlows/why-atom-cant-replace-vim-433852f4b4d1&quot;&gt;Atom&lt;/a&gt; days.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Everything started on &lt;code&gt;vim tutor&lt;/code&gt;.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;If you already not tried out &lt;code&gt;vimtutor&lt;/code&gt;, take 20 minutes and do it by typing &lt;code&gt;vimtutor&lt;/code&gt; (ahá!) on your terminal. It&amp;#39;s a simple tutorial that I recommend going through for at least 3 times.&lt;/p&gt;
+
+&lt;p&gt;There&amp;#39;s also funnier ways to put that crazy keystrokes on your muscle memory:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://vim-adventures.com&quot;&gt;Vim Adventures&lt;/a&gt; - It’s a game which you need to move a character by typing vim keystrokes H, J, K, L.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.openvim.com/&quot;&gt;Open Vim&lt;/a&gt; - An interactive terminal that guides you through vim basics.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If you’re more of a visual person like me, you’ll really like the &lt;a href=&quot;https://upcase.com/onramp-to-vim&quot;&gt;upcase basic vim course&lt;/a&gt;. They talk about everything you’ll need to know for this first week experience and much more.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;My most used commands&lt;/h2&gt;
+
+&lt;p&gt;VIM has a &lt;a href=&quot;http://www.viemu.com/vi-vim-cheat-sheet.gif&quot;&gt;unique and efficient movement way&lt;/a&gt;. Knowing the essence of it will make you a master. But since you are just starting I would recommend playing around with those commands below.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Moving&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;w&lt;/code&gt; - Jumps between words to the right.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;b&lt;/code&gt; - Jumps backwards between words.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;gg&lt;/code&gt; - Goes to the top of file.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;G&lt;/code&gt; - Goes to bottom of file.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;lt;C-d&amp;gt;&lt;/code&gt; - Jump’s around 12 lines down (great to move faster inside a file).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;&amp;lt;C-u&amp;gt;&lt;/code&gt; - Jump’s around 12 lines up.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Editing&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;o&lt;/code&gt; - Moves a line down and brings you to insert mode.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;O&lt;/code&gt; - Moves a line up and brings you to insert mode.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;ciw&lt;/code&gt; - Deletes word on your cursor and brings you to insert mode.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;diw&lt;/code&gt; - Deletes word on your cursor and stays on normal mode.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;dd&lt;/code&gt; - Deletes current line and stays on normal mode.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;x&lt;/code&gt; - Deletes a character and stays on normal mode.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;r-character&lt;/code&gt; - Replaces a character and stays on normal mode.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;A&lt;/code&gt; - Goes to end of the last word on the line and brings you to insert mode.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;I&lt;/code&gt; - Goes to the start of first word and brings you to insert mode.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A practice that keep’s me learning more commands is the &lt;a href=&quot;https://docs.google.com/spreadsheets/d/1fo8jYbau-e9ZDb_WEGFcKvIMhFhyUY4YENrM40ADZOg/edit?usp=sharing&quot;&gt;use of cheat-sheet’s&lt;/a&gt;. You can get used to apply and delete commands from that cheat-sheet when you already feel comfortable with it.&lt;/p&gt;
+
+&lt;h2&gt;Basic setup&lt;/h2&gt;
+
+&lt;p&gt;People that use vim will usually say things like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Don’t use direction keys.&lt;/li&gt;
+&lt;li&gt;Don’t waste time on insert mode.&lt;/li&gt;
+&lt;li&gt;Don’t use folder tree plugins.&lt;/li&gt;
+&lt;li&gt;Don’t over-repeat key presses.&lt;/li&gt;
+&lt;li&gt;Don&amp;#39;t do this or that.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Don’t bother yourself with those “rules” just yet. Just don’t. Make yourself comfortable with the editor and let the &lt;em&gt;usage&lt;/em&gt; tell you what you should improve on your workflow.&lt;/p&gt;
+
+&lt;p&gt;I’ve created a &lt;a href=&quot;https://gist.github.com/oswaldoferreira/e1e798d65757713b1757&quot;&gt;gist with vimrc configurations&lt;/a&gt; that I personally felt comfortable to start with.&lt;/p&gt;
+
+&lt;h3&gt;Core plugins to begin with:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;FZF&lt;/a&gt; - A really fast and simple fuzzy finder.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/rking/ag.vim&quot;&gt;ag&lt;/a&gt; - Grep like text searching.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;NERDtree&lt;/a&gt; - A folder-tree plugin. It’s not a must as you can always use the fuzzy finder.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Let the battle begin&lt;/h2&gt;
+
+&lt;p&gt;So let’s say it’s your first official day on your work using vim.&lt;/p&gt;
+
+&lt;p&gt;You can shamelessly keep both editor’s open and switch to the old one when you just get stuck. We both know that’s not
+a good practice, but it can really help pointing your inabilities on vim. What about using that editor
+switching cue to just take a note with a reason like “Need to learn how to use tabs”, or
+“Need to learn how to search and replace words”.&lt;/p&gt;
+
+&lt;p&gt;You can get all those cue points notes and dig &lt;a href=&quot;http://stackoverflow.com/&quot;&gt;stackoverflow&lt;/a&gt;, &lt;a href=&quot;vimcasts.org&quot;&gt;vimcasts&lt;/a&gt;, or just google it on your free time.&lt;/p&gt;
+
+&lt;p&gt;That practice generates some kind of a guideline, and it&amp;#39;s a &lt;em&gt;guideline based on usage&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;After a sweaty week I started to feel the shiny reward and weeks later I almost couldn&amp;#39;t see those old switching cue points between editors.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://media.giphy.com/media/87xihBthJ1DkA/giphy.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Armazenando em Hstore - Pitfalls &amp; Hints</title>

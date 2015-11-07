@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      First steps on VIM &middot; Oswaldo Ferreira
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Oswaldo Ferreira
+        </a>
+      </h1>
+      <p class="lead">All about code.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Posts</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+          
+        
+      
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">First steps on VIM</h1>
+  <span class="post-date">25 Oct 2015</span>
+  <p>So you’re planning to starting using vim but doesn’t want to afford the initial learning curve. You don’t want to let your productivity go down on your daily basis work. I’ll tell you something, there’s not a magic recipe, or even a secret way of learning it without actually struggling around with it for at least one week. But don’t feel bad already, c’mon put a smile on that face and let’s just DO IT.</p>
+
+<p>Take that vim guru in action to warm you up</p>
+
+<p><img src="http://33.media.tumblr.com/ec4935a645d0003a128a1f7cb12ca377/tumblr_inline_nsu3wtXBIv1raprkq_500.gif" alt=""></p>
+
+<p>You probably already read tons of posts talking about <a href="http://yehudakatz.com/2010/07/29/everyone-who-tried-to-convince-me-to-use-vim-was-wrong/">why you should use vim</a> instead IDE’s or “ready for action” editors out there, so I’ll focus on the VIM survivability path.</p>
+
+<p>I’ve been using only vim for just 4 months for now and I can say that i’m feeling twice (or even more) as productive compared to my <a href="https://medium.com/@mkozlows/why-atom-cant-replace-vim-433852f4b4d1">Atom</a> days.</p>
+
+<p><em>Everything started on <code>vim tutor</code>.</em></p>
+
+<p>If you already not tried out <code>vimtutor</code>, take 20 minutes and do it by typing <code>vimtutor</code> (ahá!) on your terminal. It&#39;s a simple tutorial that I recommend going through for at least 3 times.</p>
+
+<p>There&#39;s also funnier ways to put that crazy keystrokes on your muscle memory:</p>
+
+<ul>
+<li><p><a href="http://vim-adventures.com">Vim Adventures</a> - It’s a game which you need to move a character by typing vim keystrokes H, J, K, L.</p></li>
+<li><p><a href="http://www.openvim.com/">Open Vim</a> - An interactive terminal that guides you through vim basics.</p></li>
+<li><p>If you’re more of a visual person like me, you’ll really like the <a href="https://upcase.com/onramp-to-vim">upcase basic vim course</a>. They talk about everything you’ll need to know for this first week experience and much more.</p></li>
+</ul>
+
+<h2>My most used commands</h2>
+
+<p>VIM has a <a href="http://www.viemu.com/vi-vim-cheat-sheet.gif">unique and efficient movement way</a>. Knowing the essence of it will make you a master. But since you are just starting I would recommend playing around with those commands below.</p>
+
+<p><strong>Moving</strong></p>
+
+<ul>
+<li><p><code>w</code> - Jumps between words to the right.</p></li>
+<li><p><code>b</code> - Jumps backwards between words.</p></li>
+<li><p><code>gg</code> - Goes to the top of file.</p></li>
+<li><p><code>G</code> - Goes to bottom of file.</p></li>
+<li><p><code>&lt;C-d&gt;</code> - Jump’s around 12 lines down (great to move faster inside a file).</p></li>
+<li><p><code>&lt;C-u&gt;</code> - Jump’s around 12 lines up.</p></li>
+</ul>
+
+<p><strong>Editing</strong></p>
+
+<ul>
+<li><p><code>o</code> - Moves a line down and brings you to insert mode.</p></li>
+<li><p><code>O</code> - Moves a line up and brings you to insert mode.</p></li>
+<li><p><code>ciw</code> - Deletes word on your cursor and brings you to insert mode.</p></li>
+<li><p><code>diw</code> - Deletes word on your cursor and stays on normal mode.</p></li>
+<li><p><code>dd</code> - Deletes current line and stays on normal mode.</p></li>
+<li><p><code>x</code> - Deletes a character and stays on normal mode.</p></li>
+<li><p><code>r-character</code> - Replaces a character and stays on normal mode.</p></li>
+<li><p><code>A</code> - Goes to end of the last word on the line and brings you to insert mode.</p></li>
+<li><p><code>I</code> - Goes to the start of first word and brings you to insert mode.</p></li>
+</ul>
+
+<p>A practice that keep’s me learning more commands is the <a href="https://docs.google.com/spreadsheets/d/1fo8jYbau-e9ZDb_WEGFcKvIMhFhyUY4YENrM40ADZOg/edit?usp=sharing">use of cheat-sheet’s</a>. You can get used to apply and delete commands from that cheat-sheet when you already feel comfortable with it.</p>
+
+<h2>Basic setup</h2>
+
+<p>People that use vim will usually say things like:</p>
+
+<ul>
+<li>Don’t use direction keys.</li>
+<li>Don’t waste time on insert mode.</li>
+<li>Don’t use folder tree plugins.</li>
+<li>Don’t over-repeat key presses.</li>
+<li>Don&#39;t do this or that.</li>
+</ul>
+
+<p>Don’t bother yourself with those “rules” just yet. Just don’t. Make yourself comfortable with the editor and let the <em>usage</em> tell you what you should improve on your workflow.</p>
+
+<p>I’ve created a <a href="https://gist.github.com/oswaldoferreira/e1e798d65757713b1757">gist with vimrc configurations</a> that I personally felt comfortable to start with.</p>
+
+<h3>Core plugins to begin with:</h3>
+
+<ul>
+<li><a href="https://github.com/junegunn/fzf">FZF</a> - A really fast and simple fuzzy finder.</li>
+<li><a href="https://github.com/rking/ag.vim">ag</a> - Grep like text searching.</li>
+<li><a href="https://github.com/scrooloose/nerdtree">NERDtree</a> - A folder-tree plugin. It’s not a must as you can always use the fuzzy finder.</li>
+</ul>
+
+<h2>Let the battle begin</h2>
+
+<p>So let’s say it’s your first official day on your work using vim.</p>
+
+<p>You can shamelessly keep both editor’s open and switch to the old one when you just get stuck. We both know that’s not
+a good practice, but it can really help pointing your inabilities on vim. What about using that editor
+switching cue to just take a note with a reason like “Need to learn how to use tabs”, or
+“Need to learn how to search and replace words”.</p>
+
+<p>You can get all those cue points notes and dig <a href="http://stackoverflow.com/">stackoverflow</a>, <a href="vimcasts.org">vimcasts</a>, or just google it on your free time.</p>
+
+<p>That practice generates some kind of a guideline, and it&#39;s a <em>guideline based on usage</em>.</p>
+
+<p>After a sweaty week I started to feel the shiny reward and weeks later I almost couldn&#39;t see those old switching cue points between editors.</p>
+
+<p><img src="https://media.giphy.com/media/87xihBthJ1DkA/giphy.gif" alt=""></p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2014/09/29/hstore-pitfalls-and-hints/">
+            Armazenando em Hstore - Pitfalls &amp; Hints
+            <small>29 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/08/29/uma-abordagem-simples-sobre-mock-e-stub-em-ruby/">
+            Introdução à Mock e Stub com Rspec
+            <small>29 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/05/26/melhorando-workflow-com-spring/">
+            Melhorando seu workflow no Rails com Spring
+            <small>26 May 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
