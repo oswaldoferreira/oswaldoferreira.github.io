@@ -25,6 +25,11 @@ gems:
   - jekyll-gist
   - pygments.rb
 
+analytics:
+  provider: google
+  google:
+    tracking_id: 'UA-50742105-2'
+
 # Custom vars
 version:          2.1.0
 
