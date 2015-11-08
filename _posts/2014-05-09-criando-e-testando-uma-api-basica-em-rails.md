@@ -2,6 +2,7 @@
 layout: post
 title: Criando e testando uma API básica no Rails
 tags: [rspec, spec, rails, json, api]
+comments: true
 ---
 
 ## Rails & HTTP

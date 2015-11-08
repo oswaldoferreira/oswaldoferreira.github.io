@@ -4,6 +4,7 @@ title: "First steps on VIM"
 modified: 2015-10-25 00:44:28 -0200
 category: []
 tags: [vim]
+comments: true
 ---
 
 So you’re planning to starting using vim but doesn’t want to afford the initial learning curve. You don’t want to let your productivity go down on your daily basis work. I’ll tell you something, there’s not a magic recipe, or even a secret way of learning it without actually struggling around with it for at least one week. But don’t feel bad already, c’mon put a smile on that face and let’s just DO IT.
