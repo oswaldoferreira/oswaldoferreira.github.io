@@ -1,0 +1,44 @@
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+}
+
+.social a { text-decoration: none; }
+
+ul.social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Social Sidebar ---------- */
+
+#social-sidebar {
+  right: 0;
+  margin-top: -75px; /* (li * a:width) / -2 */
+  position: fixed;
+  top: 23.5%;
+}
+
+#social-sidebar a {
+  background: #121212;
+  color: #fff;
+  display: block;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+  position: relative;
+  text-align: center;
+  width: 50px;
+  margin-top: 1px;
+}
+
+#social-sidebar a[class*="github"]:hover,
+#social-sidebar a[class*="github"] span,
+#social-sidebar a[class*="github"] span:before { background: #1A4969; }
+
+#social-sidebar a[class*="twitter"]:hover,
+#social-sidebar a[class*="twitter"] span,
+#social-sidebar a[class*="twitter"] span:before { background: #00aced; }
+
